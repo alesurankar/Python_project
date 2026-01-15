@@ -1,3 +1,4 @@
+from graphics import Graphics
 from colors import Colors
 
 class Player:
@@ -20,6 +21,17 @@ class Player:
             self.y += self.speed
         if kbd.KeyIsPressed("K_d"):
             self.x += self.speed
+        self.CheckBorders()
 
     def Draw(self, gfx):
         gfx.DrawRect(self.x, self.y, self.width, self.height, Colors.Green)
+
+    def CheckBorders(self):
+        if self.x <= 0:
+            self.x += self.speed
+        elif self.x + self.width >= Graphics.wndWidth:
+            self.x -= self.speed
+        if self.y <= 0:
+            self.y += self.speed
+        elif self.y + self.height >= Graphics.wndHeight:
+            self.y -= self.speed
