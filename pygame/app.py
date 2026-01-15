@@ -1,3 +1,6 @@
+from colors import Colors
+
+
 class App:
     def __init__(self, gfx, kbd):
         self.gfx = gfx
@@ -8,11 +11,11 @@ class App:
 
     def Go(self):
         self.gfx.BeginFrame()
-        self.UpdateFrame(self.kbd)
+        self.UpdateFrame()
         self.ComposeFrame()
         self.gfx.EndFrame()
 
-    def UpdateFrame(self, kbd):
+    def UpdateFrame(self):
         if self.kbd.KeyIsPressed("K_SPACE"):
             self.speed = 3
         else: self.speed = 1
@@ -27,4 +30,4 @@ class App:
 
 
     def ComposeFrame(self):
-        self.gfx.PutPixel(self.x, self.y, (255, 255, 255))
+        self.gfx.DrawRect(self.x, self.y, 10, 10, Colors.Red)

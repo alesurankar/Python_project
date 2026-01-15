@@ -1,6 +1,7 @@
 import pygame
 from input_keyboard import Keyboard
 
+
 class Window:
     def __init__(self, width=200, height=200):
         pygame.init()
