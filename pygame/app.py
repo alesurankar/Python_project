@@ -7,10 +7,12 @@ class App:
     def __init__(self, gfx, kbd):
         self.gfx = gfx
         self.kbd = kbd
+        self.entities = []
         self.rndX = random.randint(0, Graphics.wndWidth)
         self.rndY = random.randint(0, Graphics.wndHeight)
         self.player = Player(self.rndX, self.rndY)
-        self.enemies = []
+        self.entities.append(self.player)
+        self.spawnRate = 0.02
 
     def Go(self):
         self.gfx.BeginFrame()
@@ -19,17 +21,18 @@ class App:
         self.gfx.EndFrame()
 
     def UpdateFrame(self):
-        self.player.Update(self.kbd)
-        if random.random() < 0.02:
+        if random.random() < self.spawnRate:
             self.rndX = random.randint(0, Graphics.wndWidth)
             self.rndY = random.randint(0, Graphics.wndHeight)
-            self.rndV = random.uniform(-1, 1)
-            self.enemies.append(Enemy(self.rndX, self.rndY, self.rndV, self.rndV))
+            self.rndV = random.uniform(-2, 2)
+            self.entities.append(Enemy(self.rndX, self.rndY, self.rndV, self.rndV))
 
-        for enemy in self.enemies:
-            enemy.Update()
+        for e in self.entities:
+            if isinstance(e, Player):
+                e.Update(self.kbd)
+            else:
+                e.Update()
 
     def ComposeFrame(self):
-        self.player.Draw(self.gfx)
-        for enemy in self.enemies:
-            enemy.Draw(self.gfx)
+        for e in self.entities:
+            e.Draw(self.gfx)
