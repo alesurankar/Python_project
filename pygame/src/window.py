@@ -1,6 +1,6 @@
 import pygame
-from inputKeyboard import Keyboard
-from inputMouse import Mouse
+from utils.inputKeyboard import Keyboard
+from utils.inputMouse import Mouse
 
 class Window:
     def __init__(self, width=200, height=200, FPS=60):

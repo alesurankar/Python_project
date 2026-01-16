@@ -1,6 +1,6 @@
-from graphics import Graphics
-from player import Player
-from enemy import Enemy
+from src.graphics import Graphics
+from models.player import Player
+from models.enemy import Enemy
 import random
 
 class App:

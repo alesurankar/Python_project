@@ -1,5 +1,5 @@
-from livingEntity import LivingEntity
-from colors import Colors
+from models.livingEntity import LivingEntity
+from utils.colors import Colors
 
 class Enemy(LivingEntity):
     def __init__(self, x, y, vx, vy):

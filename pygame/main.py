@@ -1,5 +1,5 @@
-from window import Window
-from app import App
+from src.window import Window
+from src.app import App
 
 scrWidth = 800
 scrHeight = 600

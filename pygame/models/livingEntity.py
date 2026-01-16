@@ -1,4 +1,4 @@
-from graphics import Graphics
+from src.graphics import Graphics
 
 class LivingEntity:
     def __init__(self, x, y, vx, vy, color):
