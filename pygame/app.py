@@ -6,11 +6,10 @@ import random
 class App:
     def __init__(self, gfx, kbd):
         self.gfx = gfx
-        self.kbd = kbd
         self.entities = []
         self.rndX = random.randint(0, Graphics.wndWidth)
         self.rndY = random.randint(0, Graphics.wndHeight)
-        self.player = Player(self.rndX, self.rndY)
+        self.player = Player(self.rndX, self.rndY, kbd)
         self.entities.append(self.player)
         self.spawnRate = 0.02
 
@@ -27,11 +26,10 @@ class App:
             self.rndV = random.uniform(-2, 2)
             self.entities.append(Enemy(self.rndX, self.rndY, self.rndV, self.rndV))
 
-        for e in self.entities:
-            if isinstance(e, Player):
-                e.Update(self.kbd)
-            else:
-                e.Update()
+        for e in self.entities[:]:
+            e.Update()
+            if isinstance(e, Enemy) and e.CheckCollision(self.player):
+                self.entities.remove(e)
 
     def ComposeFrame(self):
         for e in self.entities:

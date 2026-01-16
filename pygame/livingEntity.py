@@ -30,3 +30,11 @@ class LivingEntity:
         elif self.y + self.height >= Graphics.wndHeight:
             self.vy = -self.vy
             self.y = Graphics.wndHeight - self.height
+            
+    def CheckCollision(self, othr):
+        return (
+            self.x + self.width >= othr.x and
+            self.x <= othr.x + othr.width and
+            self.y + self.height >= othr.y and
+            self.y <= othr.y + othr.height
+        )
