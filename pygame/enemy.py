@@ -2,14 +2,14 @@ from graphics import Graphics
 from colors import Colors
 
 class Enemy:
-    def __init__(self, x, y):
+    def __init__(self, x, y, vx, vy):
         self.x = x
         self.y = y
         self.width = 12
         self.height = 12
         self.speed = 2
-        self.vx = 1
-        self.vy = 1
+        self.vx = vx
+        self.vy = vy
 
     def Update(self):
         self.x += self.vx * self.speed
