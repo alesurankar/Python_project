@@ -4,12 +4,12 @@ from enemy import Enemy
 import random
 
 class App:
-    def __init__(self, gfx, kbd):
-        self.gfx = gfx
+    def __init__(self, wnd):  
+        self.gfx = Graphics(wnd)
         self.entities = []
         self.rndX = random.randint(0, Graphics.wndWidth)
         self.rndY = random.randint(0, Graphics.wndHeight)
-        self.player = Player(self.rndX, self.rndY, kbd)
+        self.player = Player(self.rndX, self.rndY, wnd.kbd, wnd.mouse)
         self.entities.append(self.player)
         self.spawnRate = 0.02
 

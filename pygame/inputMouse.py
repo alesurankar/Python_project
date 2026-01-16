@@ -18,10 +18,10 @@ class Mouse:
         self.leftPressed = buttons[0]
         self.rightPressed = buttons[2]
 
-    def LeftIsPressed(self) -> bool:
+    def LeftPressed(self) -> bool:
         return self.leftPressed
 
-    def RightIsPressed(self) -> bool:
+    def RightPressed(self) -> bool:
         return self.rightPressed
 
     def LeftClicked(self) -> bool:

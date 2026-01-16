@@ -5,12 +5,12 @@ class Graphics:
     wndWidth = 0
     wndHeight = 0
 
-    def __init__(self, window, FPS):
-        self.FPS = FPS
+    def __init__(self, window):
         self.screen = window.screen    
-        self.clock = window.clock    
         Graphics.wndWidth = window.width
         Graphics.wndHeight = window.height
+        self.FPS = window.FPS
+        self.clock = window.clock    
 
     def PutPixel(self, x, y, color):
         if 0 <= x < Graphics.wndWidth and 0 <= y < Graphics.wndHeight:

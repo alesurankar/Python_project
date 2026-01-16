@@ -2,9 +2,10 @@ from livingEntity import LivingEntity
 from colors import Colors
 
 class Player(LivingEntity):
-    def __init__(self, x, y, kbd):
+    def __init__(self, x, y, kbd, mouse):
         super().__init__(x, y, 0, 0, Colors.Green)
         self.kbd = kbd
+        self.mouse = mouse
         self.speed = 1
 
     def Update(self):
@@ -19,6 +20,10 @@ class Player(LivingEntity):
             self.y += self.speed
         if self.kbd.KeyIsPressed("K_d"):
             self.x += self.speed
+        
+        if self.mouse.LeftClicked():
+            self.x, self.y = self.mouse.GetPos()
+
         super().CheckBorders()
 
     def Draw(self, gfx):

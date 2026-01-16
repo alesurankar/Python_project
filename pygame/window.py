@@ -1,18 +1,19 @@
 import pygame
-from inputMouse import Mouse
 from inputKeyboard import Keyboard
+from inputMouse import Mouse
 
 class Window:
-    def __init__(self, width=200, height=200):
+    def __init__(self, width=200, height=200, FPS=60):
         pygame.init()
         pygame.display.set_caption("My pygame Screen")
         self.screen = pygame.display.set_mode((width, height))
         self.width = width
         self.height = height
+        self.FPS = FPS
         self.clock = pygame.time.Clock()
         self.running = True
-        self.mouse = Mouse()
         self.kbd = Keyboard()
+        self.mouse = Mouse()
 
     def ProcessMessage(self) -> bool:
         events = pygame.event.get()
