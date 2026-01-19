@@ -10,7 +10,7 @@ avg_sunny_days = sum(sunny_days) / len(sunny_days)
 # -----------------------------
 # Graph functions
 # -----------------------------
-def draw_line(fig):
+def DrawLine(fig):
     fig.clear()
     ax = fig.add_subplot(111)
     ax.plot(months, sunny_days, marker='o', color='r', label='Sunny Days')
@@ -20,7 +20,7 @@ def draw_line(fig):
     ax.set_ylabel('Sunny Days')
     ax.legend()
 
-def draw_bar(fig):
+def DrawBar(fig):
     fig.clear()
     ax = fig.add_subplot(111)
     ax.bar(months, sunny_days, color='orange')
