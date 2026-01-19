@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from tkinter import ttk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -12,6 +13,37 @@ from plot import draw_line, draw_bar
 root = tk.Tk()
 root.title("Analysis App")
 root.geometry("800x600")
+icon_path = os.path.join("assets", 'icon.ico')
+root.iconbitmap(icon_path)
+
+# -----------------------------
+# File menu
+# -----------------------------
+menubar = tk.Menu(root)
+root.config(menu=menubar)
+file_menu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label="File", menu=file_menu)
+
+file_menu.add_command(label="Export (PNG)", command=lambda: print("Exporting PNG..."))
+file_menu.add_separator()
+file_menu.add_command(label="Exit", command=root.quit)
+
+# -----------------------------
+# View menu
+# -----------------------------
+view_menu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label="View", menu=view_menu)
+view_menu.add_command(label="Line Chart", command=lambda: show_graph(0))
+view_menu.add_command(label="Bar Chart", command=lambda: show_graph(1))
+
+# -----------------------------
+# Help menu
+# -----------------------------
+help_menu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label="Help", menu=help_menu)
+def show_about():
+    tk.messagebox.showinfo("About", "Analysis App\nVersion 1.0")
+help_menu.add_command(label="About", command=show_about)
 
 # -----------------------------
 # Top frame for controls
