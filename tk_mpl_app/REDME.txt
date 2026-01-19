@@ -6,4 +6,9 @@ venv\Scripts\activate               # activate venv
 
 pip install -r requirements.txt     # install dependencies
 
+Ctrl+Shift+P (visual Studio Code)   # Select Interpreter
+Python: Select Interpreter
+Enter Interpreter path...
+..../venv/Scripts/python.exe             
+
 py main.py                          # run the program
