@@ -1,16 +1,17 @@
 import matplotlib.pyplot as plt
 
 # Sample data
-x = [1, 2, 3, 4, 5]   # X-axis
-y = [2, 4, 6, 8, 10]  # Y-axis
+sunny_days = [8,10,7,14,20,18,25,19,18,14,12,7] 
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-# Create the plot
-plt.plot(x, y)
+avg_sunny_days = sum(sunny_days) / len(sunny_days)
 
-# Add labels and title
-plt.xlabel("X-axis")
-plt.ylabel("Y-axis")
-plt.title("My First Simple Graph")
+plt.plot(months, sunny_days, marker='o', color='r', label='Sunny Days')
+plt.title('Sunny Days per Month', fontsize=20)
+plt.xlabel('Month', fontsize=14)
+plt.ylabel('Sunny Days', fontsize=14)
 
-# Show the graph
+plt.axhline(y=avg_sunny_days, linestyle='--', color='green', label='Average Sunny Days')
+plt.legend()
+
 plt.show()
