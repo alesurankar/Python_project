@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 # -----------------------------
 title='Sunny Days per Month'
 label_in = "Sunny Days"
+yLabel = "Sunny Days"
+xLabel = "Month"
 sunny_days = [8,10,7,14,20,18,25,19,18,14,12,7]
 months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 y_in = sunny_days
@@ -14,52 +16,82 @@ avgGraphLabel = "Average Sunny Days"
 avg_sunny_days = sum(sunny_days) / len(sunny_days)
 y_avg = avg_sunny_days
 
+avg = False
+
 # -----------------------------
 # Definitions
 # -----------------------------
 xData=x_in
 yData=y_in
 graph_defaults = {
+    # General
     'color': 'blue',
     'edgecolor': 'black',
     'linewidth': 2,
     'linestyle': '-',
+    'alpha': 0.8,
+    'label': label_in,
+    # Marker options (line/scatter/errorbar)
     'marker': 'o',
     'markersize': 6,
     'markerfacecolor': 'orange',
     'markeredgecolor': 'black',
-    'alpha': 0.8,
-    'label': label_in,
-    'width': 0.8,     
-    'tick_label': x_in
+    # Bar options
+    'width': 0.8,
+    'tick_label': xData,
+    # Errorbar
+    'yerr': None,
+    'xerr': None,
+    'fmt': 'o',
+    # Histogram
+    'bins': 10,
+    # Boxplot
+    'box_facecolor': 'lightblue',
+    'box_edgecolor': 'black',
+    'median_color': 'black',
+    'whisker_color': 'black',
+    'cap_color': 'black',
+    'flier_marker': 'o',
+    'flier_color': 'red',
+    'flier_alpha': 0.5,
+    # Violinplot
+    'violin_showmeans': True,
+    'violin_showmedians': True,
+    'violin_showextrema': True,
+    # Pie
+    'colors': None,
+    'autopct': '%1.1f%%',
+    'startangle': 90,
+    'shadow': False
 }
-avg = False
 
 # -----------------------------
 # Graph functions
 # -----------------------------
 def ClearGraph(fig):
+    """Clears the figure and returns a new Axes object."""
     fig.clear()
     return fig.add_subplot(111)
 
 def SetLabels(ax, graphType):
+    """Sets title and axis labels for the current graph."""
     ax.set_title(f"{title} ({graphType})")
-    ax.set_xlabel('Month')
-    ax.set_ylabel('Sunny Days')
+    ax.set_xlabel(xLabel)
+    ax.set_ylabel(yLabel)
     ax.legend()
 
 def DrawGraph(fig, graphType='plot', **kwargs):
-    """Draw a graph of type `graphType` on the given figure.
-
-    kwargs can override defaults:
-        color, edgecolor, linewidth, linestyle, marker,
-        markersize, markerfacecolor, markeredgecolor, alpha,
-        label, width, tick_label
+    """Draws a graph of type `graphType` on the given figure.
+    
+    kwargs can override defaults in graph_defaults.
     """
     ax = ClearGraph(fig)
     options = graph_defaults.copy()
     options.update(kwargs)
 
+    # -----------------------------
+    # Graph type handling
+    # -----------------------------
     if graphType == 'plot':
         ax.plot(
             xData, yData,
@@ -105,14 +137,6 @@ def DrawGraph(fig, graphType='plot', **kwargs):
             alpha=options['alpha'],
             label=options['label']
         )
-    # elif graphType == 'hist':
-    #     ax.hist(x_data, label=graphLabel)
-    # elif graphType == 'boxplot':
-    #     ax.boxplot(y_data)
-    # elif graphType == 'violinplot':
-    #     ax.violinplot(y_data, color=graphColor, label=graphLabel)
-    # elif graphType == 'pie':
-    #     ax.pie(x_data, y_data)
     elif graphType == 'fill_between':
         ax.fill_between(
             xData, yData,
@@ -130,8 +154,9 @@ def DrawGraph(fig, graphType='plot', **kwargs):
     elif graphType == 'errorbar':
         ax.errorbar(
             xData, yData,
-            yerr=None,
-            fmt=options['marker'],
+            yerr=options['yerr'],
+            xerr=options['xerr'],
+            fmt=options['fmt'],
             color=options['color'],
             linewidth=options['linewidth'],
             markersize=options['markersize'],
@@ -140,7 +165,47 @@ def DrawGraph(fig, graphType='plot', **kwargs):
             alpha=options['alpha'],
             label=options['label']
         )
-
+    elif graphType == 'hist':
+        ax.hist(
+            yData,       
+            bins=options['bins'],
+            color=options['color'],
+            edgecolor=options['edgecolor'],
+            alpha=options['alpha'],
+            label=options['label']
+        )
+    elif graphType == 'boxplot':
+        ax.boxplot(
+            yData,
+            patch_artist=True,
+            boxprops=dict(facecolor=options['box_facecolor'], color=options['box_edgecolor']),
+            medianprops=dict(color=options['median_color']),
+            whiskerprops=dict(color=options['whisker_color']),
+            capprops=dict(color=options['cap_color']),
+            flierprops=dict(marker=options['flier_marker'], color=options['flier_color'], alpha=options['flier_alpha'])
+        )
+        ax.set_xticklabels([options['label']])
+    elif graphType == 'violinplot':
+        ax.violinplot(
+            yData,
+            showmeans=options['violin_showmeans'],
+            showmedians=options['violin_showmedians'],
+            showextrema=options['violin_showextrema']
+        )
+        ax.set_xticks([1])
+        ax.set_xticklabels([options['label']])
+    elif graphType == 'pie':
+        ax.pie(
+            yData,
+            labels=xData,
+            colors=options['colors'],
+            autopct=options['autopct'],
+            startangle=options['startangle'],
+            shadow=options['shadow']
+        )
+    # -----------------------------
+    # Average line
+    # -----------------------------
     if avg and graphType in {'plot', 'bar', 'barh', 'scatter', 'step', 'errorbar'}:
-        ax.axhline(y_avg, linestyle=options['linestyle'], color=options['color'], label=options['label'])
+        ax.axhline(y=y_avg, linestyle='--', color='green', label=avgGraphLabel)
     SetLabels(ax, graphType)
