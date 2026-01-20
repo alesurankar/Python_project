@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
-from plot import DrawLine, DrawBar
+from plot import DrawGraph
 
 
 def CreateGui(root):
@@ -19,20 +19,39 @@ def CreateGui(root):
     # -----------------------------
     # Graph functions
     # -----------------------------
-    def ShowLine():
-        DrawLine(fig)
+    GRAPH_TYPES = [
+        'plot',          # line plots
+        'bar',           # vertical bars
+        'barh',          # horizontal bars
+        'scatter',       # points
+        'hist',          # histogram
+        'boxplot',       # box & whisker
+        'violinplot',    # violin plot
+        'pie',           # pie chart
+        'fill_between',  # area under curve
+        'step',          # step plot
+        'errorbar'       # line with error bars
+    ]
+    def ShowGraph(graphType):
+        DrawGraph(fig, graphType)
         canvas.draw()
 
-    def ShowBar():
-        DrawBar(fig)
-        canvas.draw()
+    current_graph_index = 0
+    def ShowNextGraph():
+        nonlocal current_graph_index
+        current_graph_index = (current_graph_index + 1) % len(GRAPH_TYPES)
+        ShowGraph(GRAPH_TYPES[current_graph_index])
+
+    def ShowPrevGraph():
+        nonlocal current_graph_index
+        current_graph_index = (current_graph_index - 1) % len(GRAPH_TYPES)
+        ShowGraph(GRAPH_TYPES[current_graph_index])
 
     # -----------------------------
     # File menu
     # -----------------------------
     menubar = tk.Menu(root)
     root.config(menu=menubar)
-
     def ExportPNG():
         file_path = filedialog.asksaveasfilename(
             defaultextension=".png",
@@ -52,8 +71,6 @@ def CreateGui(root):
     # -----------------------------
     view_menu = tk.Menu(menubar, tearoff=0)
     menubar.add_cascade(label="View", menu=view_menu)
-    view_menu.add_command(label="Show Line Graph", command=ShowLine)
-    view_menu.add_command(label="Show Bar Chart", command=ShowBar)
 
     # -----------------------------
     # Help menu
@@ -71,15 +88,15 @@ def CreateGui(root):
     top_frame = ttk.Frame(root, padding=5)
     top_frame.pack(side=tk.TOP, fill=tk.X)
 
-    prev_button = ttk.Button(top_frame, text="Previous", command=lambda: ShowLine())
-    prev_button.pack(side=tk.RIGHT, padx=5)
-    next_button = ttk.Button(top_frame, text="Next", command=lambda: ShowBar())
+    next_button = ttk.Button(top_frame, text="Next", command=lambda: ShowNextGraph())
     next_button.pack(side=tk.RIGHT, padx=5)
+    prev_button = ttk.Button(top_frame, text="Previous", command=lambda: ShowPrevGraph())
+    prev_button.pack(side=tk.RIGHT, padx=5)
 
     # -----------------------------
     # Show initial graph
     # -----------------------------
-    ShowLine()
+    ShowGraph('plot')
 
     # Return figure and canvas in case app.py wants it
     return fig, canvas
