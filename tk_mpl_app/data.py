@@ -11,6 +11,7 @@ my_y = [8,10,7,14,20,18,25,19,18,14,12,7]
 
 my_avg = False
 my_avg_label = 'Average Sunny Days'
+############################################
 
 
 class Data:
