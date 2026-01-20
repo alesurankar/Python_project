@@ -1,28 +1,10 @@
-import matplotlib.pyplot as plt
-
-# -----------------------------
-# Data
-# -----------------------------
-title='Sunny Days per Month'
-label_in = "Sunny Days"
-yLabel = "Sunny Days"
-xLabel = "Month"
-sunny_days = [8,10,7,14,20,18,25,19,18,14,12,7]
-months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-y_in = sunny_days
-x_in = months
-
-avgGraphLabel = "Average Sunny Days"
-avg_sunny_days = sum(sunny_days) / len(sunny_days)
-y_avg = avg_sunny_days
-
-avg = False
+from data import Data
 
 # -----------------------------
 # Definitions
 # -----------------------------
-xData=x_in
-yData=y_in
+xData=Data.x
+yData=Data.y # must be numerical
 graph_defaults = {
     # General
     'color': 'blue',
@@ -30,7 +12,7 @@ graph_defaults = {
     'linewidth': 2,
     'linestyle': '-',
     'alpha': 0.8,
-    'label': label_in,
+    'label': Data.label,
     # Marker options (line/scatter/errorbar)
     'marker': 'o',
     'markersize': 6,
@@ -75,10 +57,11 @@ def ClearGraph(fig):
 
 def SetLabels(ax, graphType):
     """Sets title and axis labels for the current graph."""
-    ax.set_title(f"{title} ({graphType})")
-    ax.set_xlabel(xLabel)
-    ax.set_ylabel(yLabel)
-    ax.legend()
+    ax.set_title(f"{Data.title} ({graphType})")
+    ax.set_xlabel(Data.xLabel)
+    ax.set_ylabel(Data.yLabel)
+    if graphType in {'plot', 'bar', 'barh', 'scatter', 'fill_between', 'step', 'errorbar', 'hist', 'pie'}:
+        ax.legend()
 
 def DrawGraph(fig, graphType='plot', **kwargs):
     """Draws a graph of type `graphType` on the given figure.
@@ -206,6 +189,6 @@ def DrawGraph(fig, graphType='plot', **kwargs):
     # -----------------------------
     # Average line
     # -----------------------------
-    if avg and graphType in {'plot', 'bar', 'barh', 'scatter', 'step', 'errorbar'}:
-        ax.axhline(y=y_avg, linestyle='--', color='green', label=avgGraphLabel)
+    if Data.avg and graphType in {'plot', 'bar', 'barh', 'scatter', 'step', 'errorbar'}:
+        ax.axhline(y=Data.avg_val, linestyle='--', color='green', label=Data.avg_label)
     SetLabels(ax, graphType)
