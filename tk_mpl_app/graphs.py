@@ -1,5 +1,5 @@
+import mplfinance as mpf
 from data import Data
-
 # -----------------------------
 # Definitions
 # -----------------------------
@@ -186,6 +186,16 @@ def DrawGraph(fig, graphType='plot', **kwargs):
             startangle=options['startangle'],
             shadow=options['shadow']
         )
+    elif graphType == 'candlestick':
+        mpf.plot(
+            Data.candlestick_df,
+            type='candle',
+            ax=ax,
+            style='classic',
+            volume=False,
+            show_nontrading=False
+        )
+
     # -----------------------------
     # Average line
     # -----------------------------

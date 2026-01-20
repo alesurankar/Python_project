@@ -30,7 +30,8 @@ def CreateGui(root):
         'pie',           # pie chart
         'fill_between',  # area under curve
         'step',          # step plot
-        'errorbar'       # line with error bars
+        'errorbar',      # line with error bars
+        'candlestick',
     ]
     def ShowGraph(graphType):
         DrawGraph(fig, graphType)
