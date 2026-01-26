@@ -1,8 +1,8 @@
 from data.data import Data
 
-def DrawLineGraph(ax, xData, yData, options):
+def draw_line_graph(ax, x_data, y_data, options):
     ax.plot(
-        xData, yData,
+        x_data, y_data,
         color=options['color'],
         linestyle=options['linestyle'],
         linewidth=options['linewidth'],
@@ -14,9 +14,9 @@ def DrawLineGraph(ax, xData, yData, options):
         label=options['label']
     )
 
-def DrawBarGraph(ax, xData, yData, options):
+def draw_bar_graph(ax, x_data, y_data, options):
     ax.bar(
-        xData, yData,
+        x_data, y_data,
         color=options['color'],
         edgecolor=options['edgecolor'],
         linewidth=options['linewidth'],
@@ -26,9 +26,9 @@ def DrawBarGraph(ax, xData, yData, options):
         tick_label=options['tick_label']
     )
 
-def DrawBarhGraph(ax, xData, yData, options):
+def draw_barh_graph(ax, x_data, y_data, options):
     ax.barh(
-        y=xData, width=yData,
+        y=x_data, width=y_data,
         color=options['color'],
         edgecolor=options['edgecolor'],
         linewidth=options['linewidth'],
@@ -38,9 +38,9 @@ def DrawBarhGraph(ax, xData, yData, options):
         tick_label=options['tick_label']
     )
 
-def DrawScatterGraph(ax, xData, yData, options):
+def draw_scatter_graph(ax, x_data, y_data, options):
     ax.scatter(
-        xData, yData,
+        x_data, y_data,
         color=options['color'],
         marker=options['marker'],
         s=options['markersize']**2,
@@ -49,25 +49,25 @@ def DrawScatterGraph(ax, xData, yData, options):
         label=options['label']
     )
 
-def DrawFillBetweenGraph(ax, xData, yData, options):
+def draw_fill_between_graph(ax, x_data, y_data, options):
     ax.fill_between(
-        xData, yData,
+        x_data, y_data,
         color=options['color'],
         alpha=options['alpha'],
         label=options['label']
     )
 
-def DrawStepGraph(ax, xData, yData, options):
+def draw_step_graph(ax, x_data, y_data, options):
     ax.step(
-        xData, yData,
+        x_data, y_data,
         color=options['color'],
         linewidth=options['linewidth'],
         label=options['label']
     )
 
-def DrawErrorBarGraph(ax, xData, yData, options):
+def draw_errorbar_graph(ax, x_data, y_data, options):
     ax.errorbar(
-        xData, yData,
+        x_data, y_data,
         yerr=options['yerr'],
         xerr=options['xerr'],
         fmt=options['fmt'],
@@ -80,9 +80,9 @@ def DrawErrorBarGraph(ax, xData, yData, options):
         label=options['label']
     )
 
-def DrawHistGraph(ax, yData, options):
+def draw_hist_graph(ax, y_data, options):
     ax.hist(
-        yData,       
+        y_data,       
         bins=options['bins'],
         color=options['color'],
         edgecolor=options['edgecolor'],
@@ -90,9 +90,9 @@ def DrawHistGraph(ax, yData, options):
         label=options['label']
     )
 
-def DrawBoxPlotGraph(ax, yData, options):
+def draw_boxplot_graph(ax, y_data, options):
     ax.boxplot(
-        yData,
+        y_data,
         patch_artist=True,
         boxprops=dict(facecolor=options['box_facecolor'], color=options['box_edgecolor']),
         medianprops=dict(color=options['median_color']),
@@ -102,9 +102,9 @@ def DrawBoxPlotGraph(ax, yData, options):
     )
     ax.set_xticklabels([options['label']])
 
-def DrawViolinPlotGraph(ax, yData, options):
+def draw_violinplot_graph(ax, y_data, options):
     ax.violinplot(
-        yData,
+        y_data,
         showmeans=options['violin_showmeans'],
         showmedians=options['violin_showmedians'],
         showextrema=options['violin_showextrema']
@@ -112,17 +112,17 @@ def DrawViolinPlotGraph(ax, yData, options):
     ax.set_xticks([1])
     ax.set_xticklabels([options['label']])
 
-def DrawPieGraph(ax, xData, yData, options):
+def draw_pie_graph(ax, x_data, y_data, options):
     ax.pie(
-        yData,
-        labels=xData,
+        y_data,
+        labels=x_data,
         colors=options['colors'],
         autopct=options['autopct'],
         startangle=options['startangle'],
         shadow=options['shadow']
     )
 
-def DrawCandlestickGraph(ax, mpf):
+def draw_candlestick_graph(ax, mpf):
     mpf.plot(
         Data.candlestick_df,
         type='candle',

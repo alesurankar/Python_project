@@ -7,8 +7,8 @@ class Data:
     # -----------------------------
     title = "Sunny Days per Month"
     label = "Sunny Days"
-    xLabel = "Month"
-    yLabel = "Sunny Days"
+    x_label = "Month"
+    y_label = "Sunny Days"
 
     avg = False
     avg_label = "Average Sunny Days"

@@ -2,13 +2,12 @@ import tkinter as tk
 from tkinter import ttk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
-from charts.graphs import DrawGraph, GetGraphTypes
-from gui.navigation import MakeNavigationButtons
-from gui.menus import CreateMenus
+from charts.graphs import draw_graph, get_graph_types
+from gui.navigation import make_navigation_buttons
+from gui.menus import create_menus
 
-GRAPH_TYPES = GetGraphTypes()
 
-def CreateGui(root):
+def create_gui(root):
     # Plot frame
     plot_frame = ttk.Frame(root)
     plot_frame.pack(fill=tk.BOTH, expand=True)
@@ -17,32 +16,32 @@ def CreateGui(root):
     canvas = FigureCanvasTkAgg(fig, master=plot_frame)
     canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
 
-
+    GRAPH_TYPES = get_graph_types()
     current_graph_index = 0
 
-    def ShowGraph(graphType):
-        DrawGraph(fig, graphType)
+    def show_graph(graphType):
+        draw_graph(fig, graphType)
         canvas.draw()
 
-    def ShowNext():
+    def show_next():
         nonlocal current_graph_index
         current_graph_index = (current_graph_index + 1) % len(GRAPH_TYPES)
-        ShowGraph(GRAPH_TYPES[current_graph_index])
+        show_graph(GRAPH_TYPES[current_graph_index])
 
-    def ShowPrev():
+    def show_prev():
         nonlocal current_graph_index
         current_graph_index = (current_graph_index - 1) % len(GRAPH_TYPES)
-        ShowGraph(GRAPH_TYPES[current_graph_index])
+        show_graph(GRAPH_TYPES[current_graph_index])
 
     # Menus
-    CreateMenus(root, fig)
+    create_menus(root, fig)
         
     # Navigation buttons
     top_frame = ttk.Frame(root, padding=5)
     top_frame.pack(side="top", fill="x")
-    MakeNavigationButtons(top_frame, ShowNext, ShowPrev)
+    make_navigation_buttons(top_frame, show_next, show_prev)
 
     # Initial graph
-    ShowGraph('plot')
+    show_graph(GRAPH_TYPES[0])
 
     return fig, canvas

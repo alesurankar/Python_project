@@ -1,6 +1,6 @@
 import os
 import tkinter as tk
-from gui.gui import CreateGui
+from gui.gui import create_gui
 
 
 def main():
@@ -10,7 +10,7 @@ def main():
     icon_path = os.path.join("assets", 'icon.ico')
     root.iconbitmap(icon_path)
 
-    CreateGui(root)
+    create_gui(root)
 
     root.mainloop()
 
