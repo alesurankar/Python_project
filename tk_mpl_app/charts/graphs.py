@@ -1,28 +1,12 @@
 import mplfinance as mpf
 from data.data import Data
 from charts.graph_defaults import graph_defaults
+from charts.graph_utils import ClearGraph, SetLabels
 
-# -----------------------------
-# Definitions
-# -----------------------------
+
 xData=Data.x
 yData=Data.y # must be numerical
 
-# -----------------------------
-# Graph functions
-# -----------------------------
-def ClearGraph(fig):
-    """Clears the figure and returns a new Axes object."""
-    fig.clear()
-    return fig.add_subplot(111)
-
-def SetLabels(ax, graphType):
-    """Sets title and axis labels for the current graph."""
-    ax.set_title(f"{Data.title} ({graphType})")
-    ax.set_xlabel(Data.xLabel)
-    ax.set_ylabel(Data.yLabel)
-    if graphType in {'plot', 'bar', 'barh', 'scatter', 'fill_between', 'step', 'errorbar', 'hist', 'pie'}:
-        ax.legend()
 
 def DrawGraph(fig, graphType='plot', **kwargs):
     """Draws a graph of type `graphType` on the given figure.
