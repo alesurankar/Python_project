@@ -2,7 +2,7 @@ from tkinter import ttk
 
 
 def make_navigation_buttons(root, buttons_info):
-    style_it_out_of_its_ass()
+    style_it_now()
     
     top_frame = ttk.Frame(root, padding=5, style="TopFrame.TFrame")
     top_frame.pack(side="top", fill="x")
@@ -28,9 +28,13 @@ def make_navigation_buttons(root, buttons_info):
 
     return buttons
 
-def style_it_out_of_its_ass():
+def style_it_now():
+    # Option 1: to style with ttk    (easy)
+    # Option2: to style with Canvas  (better)
+    
     style = ttk.Style()
-    style.theme_use('clam') # Pick a good base theme
+    style.theme_use('clam')
+    #themes ('winnative', 'clam', 'alt', 'default', 'classic', 'vista', 'xpnative')
 
     # Top frame style
     style.configure("TopFrame.TFrame", background="#222222")
@@ -60,24 +64,7 @@ def style_it_out_of_its_ass():
     # Pressed and disabled (optional)
     style.map(
         "Nav.TButton",
-        relief=[("pressed", "sunken"), ("!pressed", "raised")],
+        background=[("active", "#FF5733")],
         foreground=[("disabled", "#888888")],
-        background=[("disabled", "#cccccc")]
+        relief=[("pressed", "sunken")]
     )
-
-import tkinter as tk
-
-def rounded_button(canvas, x, y, width, height, radius, text, command):
-    tag = f"btn_{text}"
-    # Draw shapes
-    canvas.create_arc(x, y, x+2*radius, y+2*radius, start=90, extent=90, fill="#4CAF50", outline="#4CAF50", tags=tag)
-    canvas.create_arc(x+width-2*radius, y, x+width, y+2*radius, start=0, extent=90, fill="#4CAF50", outline="#4CAF50", tags=tag)
-    canvas.create_arc(x, y+height-2*radius, x+2*radius, y+height, start=180, extent=90, fill="#4CAF50", outline="#4CAF50", tags=tag)
-    canvas.create_arc(x+width-2*radius, y+height-2*radius, x+width, y+height, start=270, extent=90, fill="#4CAF50", outline="#4CAF50", tags=tag)
-    canvas.create_rectangle(x+radius, y, x+width-radius, y+height, fill="#4CAF50", outline="#4CAF50", tags=tag)
-    canvas.create_rectangle(x, y+radius, x+width, y+height-radius, fill="#4CAF50", outline="#4CAF50", tags=tag)
-    # Text
-    canvas.create_text(x+width/2, y+height/2, text=text, fill="white", font=("Helvetica", 11, "bold"), tags=tag)
-    # Bind click to the whole button
-    canvas.tag_bind(tag, "<Button-1>", lambda e: command())
-
