@@ -19,8 +19,8 @@ def create_gui(root):
     GRAPH_TYPES = get_graph_types()
     current_graph_index = 0
 
-    def show_graph(graphType):
-        draw_graph(fig, graphType)
+    def show_graph(graph_type):
+        draw_graph(fig, graph_type)
         canvas.draw()
 
     def show_next():

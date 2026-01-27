@@ -1,0 +1,8 @@
+{
+  "title": "Sunny Days per Month",
+  "label": "Sunny Days",
+  "x_label": "Month",
+  "y_label": "Sunny Days",
+  "avg": true,
+  "avg_label": "Average Sunny Days"
+}
