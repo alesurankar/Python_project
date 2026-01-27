@@ -7,7 +7,7 @@ def create_menus(root, fig):
     root.config(menu=menubar)
 
     _build_menu(menubar, "File", FILE_MENU_ITEMS, {"root": root, "fig": fig})
-    _build_menu(menubar, "Help", HELP_MENU_ITEMS)
+    _build_menu(menubar, "Help", HELP_MENU_ITEMS, {})
 
 
 # Menu Builder
@@ -16,10 +16,10 @@ def _build_menu(menubar, label, items, context=None):
     menubar.add_cascade(label=label, menu=menu)
 
     for text, action in items:
-        if context is not None:
-            menu.add_command(label=text, command=lambda a=action: a(context))
-        else:
-            menu.add_command(label=text, command=action)
+            menu.add_command(
+                label=text, 
+                command=lambda a=action: a(context)
+            )
     return menu
 
 # Internal Menu
@@ -31,7 +31,7 @@ def _export_png(fig):
     if file_path:
         fig.savefig(file_path, dpi=300, bbox_inches="tight")
 
-def _show_about():
+def _show_about(context=None):
     messagebox.showinfo("About", "Analysis App\nVersion 1.0")
 
 # Items
