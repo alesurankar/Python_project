@@ -3,44 +3,52 @@ from gui.components.button import ModernButton
 from gui.components.theme import THEME
 
 
-def make_navigation_buttons(root, buttons_info):
-    frame = tk.Frame(root, bg=THEME["bg"], height=70)
-    frame.pack(side="top", fill="x")
+class NavigationBar(tk.Frame):
+    """Encapsulates navigation buttons and exposes a simple interface to App."""
+    def __init__(self, parent, button_config: list[dict]):
+        super().__init__(parent, bg=THEME["bg"], height=70)
+        self.pack(side="top", fill="x")
 
-    canvas = tk.Canvas(frame, bg=THEME["bg"], highlightthickness=0, height=70)
-    canvas.pack(fill="both", expand=True)
+        # Canvas to handle flexible button placement
+        self.canvas = tk.Canvas(self, bg=THEME["bg"], highlightthickness=0, height=70)
+        self.canvas.pack(fill="both", expand=True)
 
-    buttons_list = []
-    buttons_dict = {}
+        # Store buttons in a dict
+        self.buttons: dict[str, ModernButton] = {}
+        self._create_buttons(button_config)
+        self._update_positions()
+        self.canvas.bind("<Configure>", lambda e: self._update_positions())
 
-    # Create buttons
-    for info in buttons_info:
-        btn = ModernButton(
-            canvas, 
-            text=info["text"], 
-            command=info["command"], 
-            width=130, height=42, 
-            radius=20)
-        buttons_list.append(btn)
-        key = info.get("key")
-        if not key:
-            raise ValueError("Button config missing 'key'")
-        buttons_dict[key] = btn
 
-    def update_positions(event=None):
-        n = len(buttons_list)
-        width = canvas.winfo_width()
+    def _create_buttons(self, button_config: list[dict]):
+        for info in button_config:
+            key = info.get("key")
+            if not key:
+                raise ValueError("Button config missing 'key'")
+            btn = ModernButton(
+                self.canvas,
+                text=info["text"],
+                command=info.get("command"),
+                width=130,
+                height=42,
+                radius=20,
+            )
+            self.buttons[key] = btn
+
+    def _update_positions(self):
+        n = len(self.buttons)
+        width = self.canvas.winfo_width()
         spacing = width / (n + 1)
-        for i, btn in enumerate(buttons_list):
+        for i, btn in enumerate(self.buttons.values()):
             x = spacing * (i + 1) - btn.width / 2
-            btn.place(x=int(x), y=14)  # position inside canvas
+            btn.place(x=int(x), y=14)
+            btn._pos = (int(x), 14) 
 
-    canvas.bind("<Configure>", update_positions)
-    canvas.after(10, update_positions)
+    # --- Public API for App ---
+    def show_avg_button(self):
+        if "avg" in self.buttons:
+            self.buttons["avg"].show()
 
-    # Return navigation component parts
-    return {
-        "buttons": buttons_dict,
-        "canvas": canvas,
-        "frame": frame
-    }
+    def hide_avg_button(self):
+        if "avg" in self.buttons:
+            self.buttons["avg"].hide()

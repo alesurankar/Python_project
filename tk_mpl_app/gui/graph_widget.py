@@ -72,9 +72,11 @@ class GraphWidget(tk.Frame):
         self.canvas.draw()
 
     def update_ui(self):
-        avg_button = getattr(self.app, "avg_button", None)
-        if avg_button:
-            if self.app.current_graph in AVG_SUPPORTED:
-                avg_button.show()
-            else:
-                avg_button.hide()
+        """Show or hide Avg button using NavigationBar API, not the button itself."""
+        if not hasattr(self.app, "nav"):
+            return
+
+        if self.app.current_graph in AVG_SUPPORTED:
+            self.app.nav.show_avg_button()
+        else:
+            self.app.nav.hide_avg_button()
