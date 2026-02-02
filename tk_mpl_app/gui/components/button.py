@@ -51,7 +51,7 @@ class ModernButton(tk.Canvas):
             self.command()
 
     def show(self):
-        self.place_forget()  # remove if already placed
+        self.place_forget()
         self.place(x=self.winfo_x(), y=self.winfo_y()) 
 
     def hide(self):

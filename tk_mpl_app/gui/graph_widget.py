@@ -15,9 +15,11 @@ GRAPH_THEME = {
 AVG_SUPPORTED = {'plot', 'bar', 'barh', 'scatter', 'step', 'errorbar'}
 
 class GraphWidget(tk.Frame):
-    def __init__(self, parent, context, default_csv="data/candles.csv"):
+    def __init__(self, parent, app, default_csv="data/candles.csv"):
         super().__init__(parent, bg=THEME["bg"])
         self.pack(fill=tk.BOTH, expand=True)
+
+        self.app = app
 
         # Matplotlib figure
         self.fig = plt.Figure(figsize=(8, 5), facecolor=THEME["bg"])
@@ -27,19 +29,18 @@ class GraphWidget(tk.Frame):
 
         # Graph types
         self.GRAPH_TYPES = get_graph_types()
-        self.context = context
 
-        # Load data
+        # Load default data
         default_meta = default_csv.replace(".csv", ".meta.json")
-        self.context["data"] = Data(default_csv, default_meta)
-        self.context["current_graph_index"] = 0
-        self.context["current_graph"] = self.GRAPH_TYPES[0]
+        self.app.data = Data(default_csv, default_meta)
 
-        # Put figure and canvas into context
-        self.context["fig"] = self.fig
-        self.context["canvas"] = self.canvas
-        self.context["show_graph"] = self.show_graph
-        self.context["update_frame"] = self.update_frame
+        # Graph state
+        self.app.current_graph_index = 0
+        self.app.current_graph = self.GRAPH_TYPES[0]
+
+        # Provide a show_graph method for menus/actions
+        self.app.show_graph = self.show_graph
+        self.app.update_frame = self.update_frame
 
         # Initial draw
         self.update_frame()
@@ -57,22 +58,23 @@ class GraphWidget(tk.Frame):
                     text.set_color(GRAPH_THEME['legend_text'])
 
     def update_frame(self):
-        index = self.context["current_graph_index"]
+        index = self.app.current_graph_index
         self.show_graph(self.GRAPH_TYPES[index])
         self.update_ui()
 
     def show_graph(self, graph_type=None, data=None):
-        graph_type = graph_type or self.context["current_graph"]
-        data = data or self.context["data"]
-        self.context["current_graph"] = graph_type
+        graph_type = graph_type or self.app.current_graph
+        data = data or self.app.data
+        self.app.current_graph = graph_type
+
         draw_graph(self.fig, graph_type, data=data)
         self.apply_theme()
         self.canvas.draw()
 
     def update_ui(self):
-        avg_button = self.context.get("avg_button")
+        avg_button = getattr(self.app, "avg_button", None)
         if avg_button:
-            if self.context["current_graph"] in AVG_SUPPORTED:
+            if self.app.current_graph in AVG_SUPPORTED:
                 avg_button.show()
             else:
                 avg_button.hide()

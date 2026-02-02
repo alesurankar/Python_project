@@ -11,11 +11,21 @@ def make_navigation_buttons(root, buttons_info):
     canvas.pack(fill="both", expand=True)
 
     buttons_list = []
+    buttons_dict = {}
 
     # Create buttons
     for info in buttons_info:
-        btn = ModernButton(canvas, text=info["text"], command=info["command"], width=130, height=42, radius=20)
+        btn = ModernButton(
+            canvas, 
+            text=info["text"], 
+            command=info["command"], 
+            width=130, height=42, 
+            radius=20)
         buttons_list.append(btn)
+        key = info.get("key")
+        if not key:
+            raise ValueError("Button config missing 'key'")
+        buttons_dict[key] = btn
 
     def update_positions(event=None):
         n = len(buttons_list)
@@ -28,5 +38,9 @@ def make_navigation_buttons(root, buttons_info):
     canvas.bind("<Configure>", update_positions)
     canvas.after(10, update_positions)
 
-    # Convert list to dict keyed by button text
-    return {btn.text: btn for btn in buttons_list}
+    # Return navigation component parts
+    return {
+        "buttons": buttons_dict,
+        "canvas": canvas,
+        "frame": frame
+    }
