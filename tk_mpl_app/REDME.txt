@@ -1,5 +1,7 @@
 run comands:
 
+cd tk_mpl_app                       # get inside the project folder
+
 py -m venv venv                     # create venv
 
 venv\Scripts\activate               # activate venv
