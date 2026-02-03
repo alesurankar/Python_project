@@ -8,8 +8,26 @@ class Tools(tk.Frame):
         self.state = state
         self.theme = state.theme
         
+        # Fixed toolbar
         self.tool_bar = Bar(self, self.state, 50, 1)
         self.tool_bar.pack(side="left", fill="y")
 
+        # Expandable toolbar
         self.tool_expand = Bar(self, self.state, 60, 1)
-        self.tool_expand.pack(side="left", fill="y")
+
+        self.update_visibility()
+        
+        root.bind_all("e", self.toggle_expand)
+
+    def update_visibility(self):
+        if self.state.show_tool_expand:
+            if not self.tool_expand.winfo_ismapped():
+                self.tool_expand.pack(side="left", fill="y")
+        else:
+            self.tool_expand.pack_forget()
+
+    def toggle_expand(self, event=None):
+        self.state.show_tool_expand = not self.state.show_tool_expand
+        self.update_visibility()
+
+        

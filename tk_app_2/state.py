@@ -2,8 +2,9 @@
 
 class AppState:
     def __init__(self):
-        self.theme_name = "dark"
-        self.themes = {
+        self.show_tool_expand: bool = False
+        self.theme_name: str = "dark"
+        self.themes: dict[str, dict[str, str]] = {
             "dark": {
                 "body_bg": "#1e1e1e",
                 "body_text": "white",
