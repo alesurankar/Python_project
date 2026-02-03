@@ -1,5 +1,5 @@
 import tkinter as tk
-from gui.body.layout import Layout
+from gui.body.layout_frame import Layout
 from gui.body.tools import Tools
 
 
@@ -10,8 +10,11 @@ class BodyFrame(tk.Frame):
         self.theme = state.theme
         self.configure(bg=self.theme["body_bg"])
 
-        self.left_side = Tools(self, self.state)
-        self.left_side.pack(side="left", fill="y")
-        self.right_side = Layout(self, self.state)
-        self.right_side.pack(side="right", fill="both", expand=True)
+        self.tool_bar = Tools(self, self.state)
+        self.tool_bar.pack(side="left", fill="y")
+        #self.add(self.left_side)
+
+        self.layout = Layout(self, self.state)
+        self.layout.pack(side="right", fill="both", expand=True)
+        #self.add(self.right_side)
         

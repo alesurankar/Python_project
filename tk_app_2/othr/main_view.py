@@ -9,16 +9,16 @@ class MainView(tk.Frame):
         self.pack(fill="both", expand=True)
         self.state = state
 
-        self.graph = MatplotlibWidget(self, state)
-        self.game = PygameWidget(self, state)
+    #     self.graph = MatplotlibWidget(self, state)
+    #     self.game = PygameWidget(self, state)
 
-        self.update_visibility()
+    #     self.update_visibility()
 
-    def update_visibility(self):
-        self.graph.pack_forget()
-        self.game.pack_forget()
+    # def update_visibility(self):
+    #     self.graph.pack_forget()
+    #     self.game.pack_forget()
 
-        if self.state.show_game:
-            self.game.pack(fill="both", expand=True)
-        else:
-            self.graph.pack(fill="both", expand=True)
+    #     if self.state.show_game:
+    #         self.game.pack(fill="both", expand=True)
+    #     else:
+    #         self.graph.pack(fill="both", expand=True)
