@@ -1,6 +1,6 @@
 import tkinter as tk
 from gui.body.layout_frame import Layout
-from gui.body.tools import Tools
+from gui.body.tool_bar import ToolBar
 
 
 class BodyFrame(tk.Frame):
@@ -10,7 +10,7 @@ class BodyFrame(tk.Frame):
         self.theme = state.theme
         self.configure(bg=self.theme["body_bg"])
 
-        self.tool_bar = Tools(self, self.state)
+        self.tool_bar = ToolBar(self, self.state)
         self.tool_bar.pack(side="left", fill="y")
         #self.add(self.left_side)
 

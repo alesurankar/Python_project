@@ -10,8 +10,11 @@ class Layout(tk.PanedWindow):
         self.theme = state.theme
         self.configure(bg=self.theme["body_bg"])
 
+        self.DEFAULT_WIDTH = 60
+        self.last_expand_width = self.DEFAULT_WIDTH
+
         # Expandable toolbar
-        self.tool_expand = Bar(self, self.state, 60, 0, self.theme.get("tool_expand_bg"))
+        self.tool_expand = Bar(self, self.state, 120, 0, self.theme.get("tool_expand_bg"))
         self.add(self.tool_expand, minsize=60)
 
         self.main_view = MainView(self, self.state)
@@ -21,12 +24,15 @@ class Layout(tk.PanedWindow):
         
     def toggle_expand(self, event=None):
         if self.state.show_tool_expand.get():
+            # remember current width
+            self.last_expand_width = self.sash_coord(0)[0]
             # Collapse by setting pane width to 0
             self.paneconfigure(self.tool_expand, minsize=0)
             self.sash_place(0, 0, 0)
             self.state.show_tool_expand.set(False)
         else:
             # Expand again
+            width = max(self.last_expand_width, self.DEFAULT_WIDTH)
             self.paneconfigure(self.tool_expand, minsize=60)
-            self.sash_place(0, 60, 0)
+            self.sash_place(0, width, 0)
             self.state.show_tool_expand.set(True)
