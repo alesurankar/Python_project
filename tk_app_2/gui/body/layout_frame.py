@@ -23,9 +23,8 @@ class Layout(tk.PanedWindow):
 
     def show_expand(self):
         if not self.state.show_tool_expand.get():
-            width = self.last_expand_width
-            self.paneconfigure(self.tool_expand, minsize=self.DEFAULT_WIDTH, width=width)
-            self.sash_place(0, width, 0)
+            self.paneconfigure(self.tool_expand, width=self.last_expand_width)
+            self.sash_place(0, self.last_expand_width, 0)
             self.state.show_tool_expand.set(True)
 
     def hide_expand(self):
@@ -36,6 +35,6 @@ class Layout(tk.PanedWindow):
                 self.last_expand_width = self.DEFAULT_WIDTH
 
             # Collapse only expandable pane
-            self.paneconfigure(self.tool_expand, minsize=1, width=1)
-            self.sash_place(0, 1, 0)
+            self.paneconfigure(self.tool_expand, minsize=0, width=0)
+            self.sash_place(0, 0, 0)
             self.state.show_tool_expand.set(False)
