@@ -1,9 +1,9 @@
 import tkinter as tk
-from gui.layout import Layout
-from gui.tools import Tools
+from gui.body.layout import Layout
+from gui.body.tools import Tools
 
 
-class Body(tk.Frame):
+class BodyFrame(tk.Frame):
     def __init__(self, root, state):
         super().__init__(root)
         self.state = state

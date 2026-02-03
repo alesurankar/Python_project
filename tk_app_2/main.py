@@ -1,8 +1,8 @@
 import tkinter as tk
 from state import AppState
 from gui.menu_bar import MenuBar
-from gui.body import Body
-from gui.footer import Footer
+from gui.body_frame import BodyFrame
+from gui.footer_bar import FooterBar
 
 
 root = tk.Tk()
@@ -12,9 +12,9 @@ root.minsize(width=400, height=220)
 
 state = AppState()
 menu = MenuBar(root, state)  
-footer = Footer(root, state, 30) 
+footer = FooterBar(root, state, 30) 
 footer.pack(side="bottom", fill="x")  
-body = Body(root, state)  
+body = BodyFrame(root, state)  
 body.pack(fill="both", expand=True)
 
 
