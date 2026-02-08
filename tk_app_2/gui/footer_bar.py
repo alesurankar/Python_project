@@ -7,7 +7,6 @@ class FooterBar(tk.Frame):
         self.state = state
         self.theme = state.theme
         self.configure(bg=self.theme["footer_bg"])
-        self.pack_propagate(False)
         
         self.label = tk.Label(
             self,

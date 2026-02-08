@@ -14,7 +14,7 @@ class AppState:
                 "tool_bar_text": "#657885",
                 "tool_bar_text_hover": "#ffffff",
                 "nav_bg": "#363636",
-                "footer_bg": "#2e2e2e",
+                "footer_bg": "#007acc",
                 "footer_text": "white",
             }
         }
