@@ -1,5 +1,6 @@
 import tkinter as tk
 
+
 def create_file_menu(root, menubar):
     # File menu
     file_menu = tk.Menu(menubar, tearoff=0)
@@ -72,58 +73,3 @@ def create_file_menu(root, menubar):
     file_menu.add_command(label="Exit", command=root.quit)
     menubar.add_cascade(label="File", menu=file_menu)
     return file_menu
-
-def create_edit_menu(root, menubar):
-    # Edit menu
-    edit_menu = tk.Menu(menubar, tearoff=0)
-    edit_menu.add_command(label="Undo")
-    edit_menu.add_command(label="Redo")
-    edit_menu.add_separator()
-    edit_menu.add_command(label="Cut")
-    edit_menu.add_command(label="Copy")
-    edit_menu.add_command(label="Paste")
-    menubar.add_cascade(label="Edit", menu=edit_menu)
-    return edit_menu
-
-def create_selection_menu(root, menubar):
-    # Selection menu
-    selection_menu = tk.Menu(menubar, tearoff=0)
-
-    menubar.add_cascade(label="Selection", menu=selection_menu)
-    return selection_menu
-
-def create_view_menu(root, menubar):
-    # View menu
-    view_menu = tk.Menu(menubar, tearoff=0)
-
-    menubar.add_cascade(label="View", menu=view_menu)
-    return view_menu
-
-def create_go_menu(root, menubar):
-    # Go menu
-    go_menu = tk.Menu(menubar, tearoff=0)
-
-    menubar.add_cascade(label="Go", menu=go_menu)
-    return go_menu
-
-def create_run_menu(root, menubar):
-    # Run menu
-    run_menu = tk.Menu(menubar, tearoff=0)
-
-    menubar.add_cascade(label="Run", menu=run_menu)
-    return run_menu
-    
-def create_terminal_menu(root, menubar):
-    # Terminal menu
-    terminal_menu = tk.Menu(menubar, tearoff=0)
-
-    menubar.add_cascade(label="Terminal", menu=terminal_menu)
-    return terminal_menu
-    
-def create_help_menu(root, menubar):
-    # Help menu
-    help_menu = tk.Menu(menubar, tearoff=0)
-    help_menu.add_command(label="About")
-
-    menubar.add_cascade(label="Help", menu=help_menu)
-    return help_menu
