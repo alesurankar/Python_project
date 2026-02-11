@@ -39,3 +39,4 @@ def dispatch(action):
         func(action)
     else:
         messagebox.showinfo("Info", f"Function '{action}' does not exist.")
+        print("❌ Missing function:", action)
