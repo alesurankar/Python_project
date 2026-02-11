@@ -9,9 +9,19 @@ class MenuBar:
         menubar = tk.Menu(root)
         root.config(menu=menubar)
 
+        self.file_menu = self.create_file_menu(menubar)
+        self.edit_menu = self.create_edit_menu(menubar)
+        self.selection_menu = self.create_selection_menu(menubar)
+        self.view_menu = self.create_view_menu(menubar)
+        self.go_menu = self.create_go_menu(menubar)
+        self.run_menu = self.create_run_menu(menubar)
+        self.terminal_menu = self.create_terminal_menu(menubar)
+        self.help_menu = self.create_help_menu(menubar)
+
+
+    def create_file_menu(self, menubar):
         # File menu
         file_menu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="File", menu=file_menu)
         file_menu.add_command(label="New Text File")
         file_menu.add_command(label="New File...")
         file_menu.add_command(label="New Window")
@@ -78,33 +88,61 @@ class MenuBar:
         file_menu.add_command(label="Close Window")
         file_menu.add_separator()
 
-        file_menu.add_command(label="Exit", command=root.quit)
+        file_menu.add_command(label="Exit", command=self.root.quit)
+        menubar.add_cascade(label="File", menu=file_menu)
+        return file_menu
 
+    def create_edit_menu(self, menubar):
         # Edit menu
         edit_menu = tk.Menu(menubar, tearoff=0)
+        edit_menu.add_command(label="Undo")
+        edit_menu.add_command(label="Redo")
+        edit_menu.add_separator()
+        edit_menu.add_command(label="Cut")
+        edit_menu.add_command(label="Copy")
+        edit_menu.add_command(label="Paste")
         menubar.add_cascade(label="Edit", menu=edit_menu)
+        return edit_menu
 
+    def create_selection_menu(self, menubar):
         # Selection menu
         selection_menu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="Selection", menu=selection_menu)
 
+        menubar.add_cascade(label="Selection", menu=selection_menu)
+        return selection_menu
+
+    def create_view_menu(self, menubar):
         # View menu
         view_menu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="View", menu=view_menu)
 
+        menubar.add_cascade(label="View", menu=view_menu)
+        return view_menu
+
+    def create_go_menu(self, menubar):
         # Go menu
         go_menu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="Go", menu=go_menu)
 
+        menubar.add_cascade(label="Go", menu=go_menu)
+        return go_menu
+
+    def create_run_menu(self, menubar):
         # Run menu
         run_menu = tk.Menu(menubar, tearoff=0)
+
         menubar.add_cascade(label="Run", menu=run_menu)
+        return run_menu
         
+    def create_terminal_menu(self, menubar):
         # Terminal menu
         terminal_menu = tk.Menu(menubar, tearoff=0)
+
         menubar.add_cascade(label="Terminal", menu=terminal_menu)
+        return terminal_menu
         
+    def create_help_menu(self, menubar):
         # Help menu
         help_menu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="Help", menu=help_menu)
         help_menu.add_command(label="About")
+
+        menubar.add_cascade(label="Help", menu=help_menu)
+        return help_menu
