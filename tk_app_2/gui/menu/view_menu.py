@@ -146,5 +146,5 @@ def create_view_menu(root, menubar):
     return view_menu
 
 
-def placeholder(action):
+def dispatch(action):
     messagebox.showinfo("Info", f"{action} (not implemented yet)")

@@ -76,5 +76,5 @@ def create_file_menu(root, menubar):
     return file_menu
 
 
-def placeholder(action):
+def dispatch(action):
     messagebox.showinfo("Info", f"{action} (not implemented yet)")

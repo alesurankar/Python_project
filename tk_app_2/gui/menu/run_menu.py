@@ -36,5 +36,5 @@ def create_run_menu(root, menubar):
     return run_menu
 
 
-def placeholder(action):
+def dispatch(action):
     messagebox.showinfo("Info", f"{action} (not implemented yet)")

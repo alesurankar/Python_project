@@ -29,5 +29,5 @@ def create_selection_menu(root, menubar):
     return selection_menu
 
 
-def placeholder(action):
+def dispatch(action):
     messagebox.showinfo("Info", f"{action} (not implemented yet)")

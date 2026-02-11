@@ -81,5 +81,5 @@ def create_go_menu(root, menubar):
     return go_menu
 
 
-def placeholder(action):
+def dispatch(action):
     messagebox.showinfo("Info", f"{action} (not implemented yet)")
