@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from gui.menu.commands import terminal_menu_cmd
 
     
 def create_terminal_menu(root, menubar):
@@ -29,4 +30,9 @@ def create_terminal_menu(root, menubar):
 
 
 def dispatch(action):
-    messagebox.showinfo("Info", f"{action} (not implemented yet)")
+    func = getattr(terminal_menu_cmd, action, None)
+
+    if callable(func):
+        func(action)
+    else:
+        messagebox.showinfo("Info", "function: "f">>{action}()<< doesn't exsist")
