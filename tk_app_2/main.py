@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from state import AppState
 from gui.menu_bar import MenuBar
@@ -6,8 +7,10 @@ from gui.footer_bar import FooterBar
 
 
 root = tk.Tk()
-root.title("Analysis App")
+root.title("Visual Studio Code - fake")
 root.geometry("800x600")
+icon_path = os.path.join("assets", 'icon.ico')
+root.iconbitmap(icon_path)
 root.minsize(width=400, height=220)
 
 state = AppState(root)
