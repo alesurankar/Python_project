@@ -15,9 +15,9 @@ class FooterBar(tk.Frame):
             anchor="w"
         )
         self.label.pack(fill="x", padx=20)
-        self.state.show_tool_expand.trace_add("write", self.update_status)
+        self.state.show_primary_side_bar.trace_add("write", self.update_status)
 
         self.update_status()
 
     def update_status(self, *args):
-        self.label.config(text=f"Tool Expand: {self.state.show_tool_expand.get()}")
+        self.label.config(text=f"Tool Expand: {self.state.show_primary_side_bar.get()}")
