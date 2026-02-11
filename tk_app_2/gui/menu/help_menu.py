@@ -47,6 +47,6 @@ def dispatch(action):
     func = getattr(help_menu_cmd, action, None)
 
     if callable(func):
-        func()
+        func(action)
     else:
-        messagebox.showinfo("Info", f"{action} (not implemented yet)")
+        messagebox.showinfo("Info", "function: "f">>{action}()<< doesn't exsist")
