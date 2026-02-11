@@ -2,8 +2,8 @@ import tkinter as tk
 
 
 def create_file_menu(root, menubar):
-    # File menu
     file_menu = tk.Menu(menubar, tearoff=0)
+    
     file_menu.add_command(label="New Text File")
     file_menu.add_command(label="New File...")
     file_menu.add_command(label="New Window")
