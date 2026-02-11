@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 
 def create_selection_menu(root, menubar):
@@ -26,3 +27,7 @@ def create_selection_menu(root, menubar):
 
     menubar.add_cascade(label="Selection", menu=selection_menu)
     return selection_menu
+
+
+def placeholder(action):
+    messagebox.showinfo("Info", f"{action} (not implemented yet)")

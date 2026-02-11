@@ -41,5 +41,6 @@ def create_help_menu(root, menubar):
     menubar.add_cascade(label="Help", menu=help_menu)
     return help_menu
 
+
 def placeholder(action):
     messagebox.showinfo("Info", f"{action} (not implemented yet)")

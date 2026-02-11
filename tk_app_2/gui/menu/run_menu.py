@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 
 def create_run_menu(root, menubar):
@@ -33,3 +34,7 @@ def create_run_menu(root, menubar):
 
     menubar.add_cascade(label="Run", menu=run_menu)
     return run_menu
+
+
+def placeholder(action):
+    messagebox.showinfo("Info", f"{action} (not implemented yet)")

@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 
 def create_edit_menu(root, menubar):
@@ -22,3 +23,7 @@ def create_edit_menu(root, menubar):
     edit_menu.add_command(label="Emmet: Expand Abbreviation")
     menubar.add_cascade(label="Edit", menu=edit_menu)
     return edit_menu
+
+
+def placeholder(action):
+    messagebox.showinfo("Info", f"{action} (not implemented yet)")

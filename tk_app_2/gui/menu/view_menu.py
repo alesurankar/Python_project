@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 
 def create_view_menu(root, menubar):
@@ -143,3 +144,7 @@ def create_view_menu(root, menubar):
 
     menubar.add_cascade(label="View", menu=view_menu)
     return view_menu
+
+
+def placeholder(action):
+    messagebox.showinfo("Info", f"{action} (not implemented yet)")

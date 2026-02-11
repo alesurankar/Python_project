@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 
 def create_file_menu(root, menubar):
@@ -73,3 +74,7 @@ def create_file_menu(root, menubar):
     file_menu.add_command(label="Exit", command=root.quit)
     menubar.add_cascade(label="File", menu=file_menu)
     return file_menu
+
+
+def placeholder(action):
+    messagebox.showinfo("Info", f"{action} (not implemented yet)")
