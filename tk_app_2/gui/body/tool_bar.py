@@ -9,11 +9,13 @@ class ToolBar(tk.Frame):
         self.layout = layout
         self.theme = state.theme
         self.active_btn = None
+        self.buttons = {}
         
         self.tool_bar = Bar(self, self.state, 50, 0, self.theme.get("tool_bg"))
         self.tool_bar.pack(side="left", fill="y")
 
         self._build_ui()
+        self._set_default_active()
     
     def _build_ui(self):
         c = self.tool_bar.canvas
@@ -45,6 +47,7 @@ class ToolBar(tk.Frame):
             cursor="hand2",
         )
         btn.pack(fill="x")
+        self.buttons[name] = btn
 
         # hover effect
         btn.bind("<Enter>", lambda e: btn.config(fg=self.theme.get("tool_bar_text_hover")))
@@ -53,13 +56,21 @@ class ToolBar(tk.Frame):
 
         btn.tooltip = name 
 
+    def _set_default_active(self):
+        if self.state.show_tool_expand.get():
+            explorer_btn = self.buttons.get("Explorer")
+            if explorer_btn:
+                self._activate(explorer_btn)
+        else:
+            self.active_btn = None
+
     def _activate(self, btn):
         if self.active_btn == btn:
             # If clicking the active button, deactivate it
             if self.layout.state.show_tool_expand.get():
-                self.layout.hide_expand()  # hide explicitly
+                self.layout.hide_expand()
             else:
-                self.layout.show_expand()  # show explicitly
+                self.layout.show_expand()
             self.active_btn = None
             btn.config(fg=self.theme.get("tool_bar_text"), bg=self.theme.get("tool_bg"))
             return
@@ -71,10 +82,8 @@ class ToolBar(tk.Frame):
         # Activate this one
         btn.config(fg=self.theme.get("tool_bar_text_hover"), bg=self.theme.get("tool_expand_bg"))
         self.active_btn = btn
-        # optionally show toolbar if you want
         self.layout.show_expand()
 
     def _deactivate(self, btn):
         if btn != self.active_btn:
             btn.config(fg=self.theme.get("tool_bar_text"))
-            self.layout.hide_expand()
