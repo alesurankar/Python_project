@@ -26,3 +26,55 @@ class MenuBar:
         self.run_menu = create_run_menu(self.root, self.theme, menubar)
         self.terminal_menu = create_terminal_menu(self.root, self.theme, menubar)
         self.help_menu = create_help_menu(self.root, self.theme, menubar)
+
+
+
+from othr.bar import Bar
+
+
+class MenuBar2(tk.Frame):
+    def __init__(self, root, state, dim):
+        super().__init__(root)
+        self.state = state
+        self.theme = state.theme
+        self.dim = dim
+        self.buttons = {}
+        
+        self.menu_bar = Bar(self, self.state, dim, 0, self.theme.get("menu_bar_bg"))
+        self.menu_bar.pack(side="top", fill="x")
+
+        self._build_ui()
+    
+
+    def _build_ui(self):
+        c = self.menu_bar.canvas
+
+#         # buttons
+        top_frame = tk.Frame(c, bg=self.theme.get("menu_bar_bg"))
+        c.create_window((0, 0), window=top_frame, anchor="nw")
+        for icon, name in [
+                ("File", "File"),
+                ("Edit", "Edit"),
+            ]:
+            self._add_button(icon, name, top_frame)
+
+
+        top_frame.update_idletasks()
+        c.config(scrollregion=c.bbox("all"))
+
+
+    def _add_button(self, icon, name, parent):
+        btn = tk.Label(
+            parent,
+            text=icon,
+            font=("Segoe UI Emoji", 10),
+            bg=self.theme.get("menu_bar_bg"),
+            fg=self.theme.get("menu_bar_text"),
+            padx=8,
+            pady=3,
+            cursor="hand2",
+        )
+        btn.pack(fill="x")
+        self.buttons[name] = btn
+        btn.tooltip = name 
+
