@@ -7,15 +7,16 @@ from gui.footer_bar import FooterBar
 
 
 root = tk.Tk()
+#root.overrideredirect(True)
 root.title("Visual Studio Code - fake")
-root.geometry("800x600")
+root.geometry("800x600+100+100")
 icon_path = os.path.join("assets", 'icon.ico')
 root.iconbitmap(icon_path)
 root.minsize(width=400, height=220)
 
 state = AppState(root)
-menu = MenuBar(root, state) 
-menu2 = MenuBar2(root, state, 26) 
+#menu = MenuBar(root, state) 
+menu2 = MenuBar2(root, state) 
 menu2.pack(side="top", fill="x") 
 footer = FooterBar(root, state, 30) 
 footer.pack(side="bottom", fill="x")  

@@ -87,3 +87,32 @@ def create_go_menu(root, theme, menubar):
 
     menubar.add_cascade(label="Go", menu=go_menu)
     return go_menu
+
+
+
+
+
+
+def create_go_menu(parent, theme):
+    btn = tk.Label(
+        parent,
+        text="Go",
+        font=("Segoe UI Emoji", 10),
+        bg=theme.get("menu_bar_bg"),
+        fg=theme.get("menu_bar_text"),
+        padx=6,
+        pady=4,
+    )
+    btn.pack(side="left", padx=2)
+
+    # Optional: hover effect
+    def on_enter(e):
+        btn.config(bg=theme.get("menu_bar_bg_hover"))
+
+    def on_leave(e):
+        btn.config(bg=theme.get("menu_bar_bg"))
+
+    btn.bind("<Enter>", on_enter)
+    btn.bind("<Leave>", on_leave)
+
+    return {"button": btn}
