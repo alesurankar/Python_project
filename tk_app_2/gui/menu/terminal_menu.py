@@ -3,8 +3,15 @@ from gui.menu.commands import terminal_cmd
 from gui.menu.helper import menu_helpers as helper
 
     
-def create_terminal_menu(root, menubar):
-    terminal_menu = tk.Menu(menubar, tearoff=0)
+def create_terminal_menu(root, theme, menubar):
+    terminal_menu = tk.Menu(
+        menubar,
+        tearoff=0,
+        bg=theme.get("menu_bg"),
+        fg=theme.get("menu_text"),
+        activebackground=theme.get("menu_bg_hover"),
+        activeforeground=theme.get("menu_text_hover"),
+    )
 
     terminal_menu.add_command(label="New Terminal", command=helper.cmd("new_terminal", terminal_cmd))
     terminal_menu.add_command(label="Split Terminal", command=helper.cmd("split_terminal", terminal_cmd))

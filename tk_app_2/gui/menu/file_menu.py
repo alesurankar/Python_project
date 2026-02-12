@@ -3,8 +3,15 @@ from gui.menu.commands import file_cmd
 from gui.menu.helper import menu_helpers as helper
 
 
-def create_file_menu(root, menubar):
-    file_menu = tk.Menu(menubar, tearoff=0)
+def create_file_menu(root, theme, menubar):
+    file_menu = tk.Menu(
+        menubar,
+        tearoff=0,
+        bg=theme.get("menu_bg"),
+        fg=theme.get("menu_text"),
+        activebackground=theme.get("menu_bg_hover"),
+        activeforeground=theme.get("menu_text_hover"),
+    )
     
     file_menu.add_command(label="New Text File", command=helper.cmd("new_text_file", file_cmd))
     file_menu.add_command(label="New File...", command=helper.cmd("new_file", file_cmd))

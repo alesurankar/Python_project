@@ -3,8 +3,15 @@ from gui.menu.commands import view_cmd
 from gui.menu.helper import menu_helpers as helper
 
 
-def create_view_menu(root, menubar):
-    view_menu = tk.Menu(menubar, tearoff=0)
+def create_view_menu(root, theme, menubar):
+    view_menu = tk.Menu(
+        menubar,
+        tearoff=0,
+        bg=theme.get("menu_bg"),
+        fg=theme.get("menu_text"),
+        activebackground=theme.get("menu_bg_hover"),
+        activeforeground=theme.get("menu_text_hover"),
+    )
     view = helper.ensure_namespace(root, "view")
 
     view_menu.add_command(label="Command Palette...", command=helper.cmd("command_palette", view_cmd))

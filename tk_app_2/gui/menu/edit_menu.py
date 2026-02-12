@@ -3,8 +3,15 @@ from gui.menu.commands import edit_cmd
 from gui.menu.helper import menu_helpers as helper
 
 
-def create_edit_menu(root, menubar):
-    edit_menu = tk.Menu(menubar, tearoff=0)
+def create_edit_menu(root, theme, menubar):
+    edit_menu = tk.Menu(
+        menubar,
+        tearoff=0,
+        bg=theme.get("menu_bg"),
+        fg=theme.get("menu_text"),
+        activebackground=theme.get("menu_bg_hover"),
+        activeforeground=theme.get("menu_text_hover"),
+    )
 
     edit_menu.add_command(label="Undo", command=helper.cmd("undo", edit_cmd))
     edit_menu.add_command(label="Redo", command=helper.cmd("redo", edit_cmd))

@@ -3,8 +3,15 @@ from gui.menu.commands import help_cmd
 from gui.menu.helper import menu_helpers as helper
 
 
-def create_help_menu(root, menubar):
-    help_menu = tk.Menu(menubar, tearoff=0)
+def create_help_menu(root, theme, menubar):
+    help_menu = tk.Menu(
+        menubar,
+        tearoff=0,
+        bg=theme.get("menu_bg"),
+        fg=theme.get("menu_text"),
+        activebackground=theme.get("menu_bg_hover"),
+        activeforeground=theme.get("menu_text_hover"),
+    )
     
     help_menu.add_command(label="Welcome", command=helper.cmd("welcome", help_cmd))
     help_menu.add_command(label="Show All Commands", command=helper.cmd("show_all_commands", help_cmd))

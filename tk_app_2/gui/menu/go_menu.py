@@ -3,8 +3,15 @@ from gui.menu.commands import go_cmd
 from gui.menu.helper import menu_helpers as helper
 
 
-def create_go_menu(root, menubar):
-    go_menu = tk.Menu(menubar, tearoff=0)
+def create_go_menu(root, theme, menubar):
+    go_menu = tk.Menu(
+        menubar,
+        tearoff=0,
+        bg=theme.get("menu_bg"),
+        fg=theme.get("menu_text"),
+        activebackground=theme.get("menu_bg_hover"),
+        activeforeground=theme.get("menu_text_hover"),
+    )
 
     go_menu.add_command(label="Back", command=helper.cmd("back", go_cmd))
     go_menu.add_command(label="Forward", command=helper.cmd("forward", go_cmd), state="disabled")

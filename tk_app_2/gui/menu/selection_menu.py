@@ -3,8 +3,15 @@ from gui.menu.commands import selection_cmd
 from gui.menu.helper import menu_helpers as helper
 
 
-def create_selection_menu(root, menubar):
-    selection_menu = tk.Menu(menubar, tearoff=0)
+def create_selection_menu(root, theme, menubar):
+    selection_menu = tk.Menu(
+        menubar,
+        tearoff=0,
+        bg=theme.get("menu_bg"),
+        fg=theme.get("menu_text"),
+        activebackground=theme.get("menu_bg_hover"),
+        activeforeground=theme.get("menu_text_hover"),
+    )
 
     selection_menu.add_command(label="Select All", command=helper.cmd("select_all", selection_cmd))
     selection_menu.add_command(label="Expand Selection", command=helper.cmd("expand_selection", selection_cmd))

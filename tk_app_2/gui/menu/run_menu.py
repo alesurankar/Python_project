@@ -3,8 +3,15 @@ from gui.menu.commands import run_cmd
 from gui.menu.helper import menu_helpers as helper
 
 
-def create_run_menu(root, menubar):
-    run_menu = tk.Menu(menubar, tearoff=0)
+def create_run_menu(root, theme, menubar):
+    run_menu = tk.Menu(
+        menubar,
+        tearoff=0,
+        bg=theme.get("menu_bg"),
+        fg=theme.get("menu_text"),
+        activebackground=theme.get("menu_bg_hover"),
+        activeforeground=theme.get("menu_text_hover"),
+    )
     
     run_menu.add_command(label="Start Debugging", command=helper.cmd("start_debugging", run_cmd))
     run_menu.add_command(label="Run Without Debugging", command=helper.cmd("run_without_debugging", run_cmd))

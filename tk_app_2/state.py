@@ -14,7 +14,11 @@ class AppState:
                 "activity_bar_text_hover": "#ffffff",
                 "primary_side_bar_bg": "#252526",
                 "footer_bg": "#007acc",
-                "footer_text": "white",
+                "footer_text": "#ffffff",
+                "menu_bg": "#252526",
+                "menu_text": "#ffffff",
+                "menu_bg_hover": "#007acc",
+                "menu_text_hover": "#ffffff",
             }
         }
 
