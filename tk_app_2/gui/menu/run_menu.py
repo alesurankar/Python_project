@@ -48,7 +48,7 @@ def create_run_menu(root, theme, menubar):
 
 
 
-def create_run_menu(parent, theme):
+def create_run_menu2(parent, theme):
     btn = tk.Label(
         parent,
         text="Run",

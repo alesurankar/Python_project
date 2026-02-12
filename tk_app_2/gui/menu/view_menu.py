@@ -158,7 +158,7 @@ def create_view_menu(root, theme, menubar):
 
 
 
-def create_view_menu(parent, theme):
+def create_view_menu2(parent, theme):
     btn = tk.Label(
         parent,
         text="View",

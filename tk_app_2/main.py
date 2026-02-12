@@ -15,7 +15,7 @@ root.iconbitmap(icon_path)
 root.minsize(width=400, height=220)
 
 state = AppState(root)
-#menu = MenuBar(root, state) 
+menu = MenuBar(root, state) 
 menu2 = MenuBar2(root, state) 
 menu2.pack(side="top", fill="x") 
 footer = FooterBar(root, state, 30) 

@@ -42,7 +42,7 @@ def create_selection_menu(root, theme, menubar):
 
 
 
-def create_selection_menu(parent, theme):
+def create_selection_menu2(parent, theme):
     btn = tk.Label(
         parent,
         text="Selection",

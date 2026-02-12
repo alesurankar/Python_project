@@ -55,7 +55,7 @@ def create_help_menu(root, theme, menubar):
 
 
 
-def create_help_menu(parent, theme):
+def create_help_menu2(parent, theme):
     btn = tk.Label(
         parent,
         text="Help",

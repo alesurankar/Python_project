@@ -86,7 +86,7 @@ def create_file_menu(root, theme, menubar):
 
 
 
-def create_file_menu(parent, theme):
+def create_file_menu2(parent, theme):
     btn = tk.Label(
         parent,
         text="File",

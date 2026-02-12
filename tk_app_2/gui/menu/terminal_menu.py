@@ -41,7 +41,7 @@ def create_terminal_menu(root, theme, menubar):
 
 
 
-def create_terminal_menu(parent, theme):
+def create_terminal_menu2(parent, theme):
     btn = tk.Label(
         parent,
         text="Terminal",

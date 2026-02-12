@@ -93,7 +93,7 @@ def create_go_menu(root, theme, menubar):
 
 
 
-def create_go_menu(parent, theme):
+def create_go_menu2(parent, theme):
     btn = tk.Label(
         parent,
         text="Go",
