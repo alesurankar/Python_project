@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import messagebox
 from gui.menu.commands import go_cmd
 from gui.menu.helper import menu_helpers as helper
 
