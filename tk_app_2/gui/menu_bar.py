@@ -25,6 +25,3 @@ class MenuBar:
         self.run_menu = create_run_menu(self.root, menubar)
         self.terminal_menu = create_terminal_menu(self.root, menubar)
         self.help_menu = create_help_menu(self.root, menubar)
-
-
-    
