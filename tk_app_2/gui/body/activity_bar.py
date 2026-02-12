@@ -20,24 +20,38 @@ class ActivityBar(tk.Frame):
     def _build_ui(self):
         c = self.activity_bar.canvas
 
-        self.btn_frame = tk.Frame(c, bg=self.theme.get("activity_bar_bg"))
-        c.create_window((0, 0), window=self.btn_frame, anchor="nw")
+        self.top_frame = tk.Frame(c, bg=self.theme.get("activity_bar_bg"))
+        c.create_window((0, 0), window=self.top_frame, anchor="nw")
 
-        buttons = [
+        top_buttons = [
             ("📁", "Explorer"),
             ("🔍", "Search"),
+            ("🧩", "Source Control"),
+            ("▶️", "Run"),
+            ("🔌", "Extensions"),
+            ("🧪", "Testing"),
+        ]
+
+        for icon, name in top_buttons:
+            self._add_button(icon, name, parent=self.top_frame)
+
+        self.bottom_frame = tk.Frame(c, bg=self.theme.get("activity_bar_bg"))
+        self.bottom_frame.pack(side="bottom", fill="x")
+
+        bottom_buttons = [
+            ("👤", "Accounts"),
             ("⚙️", "Settings"),
         ]
 
-        for icon, name in buttons:
-            self._add_button(icon, name)
+        for icon, name in bottom_buttons:
+            self._add_button(icon, name, parent=self.bottom_frame)
 
-        self.btn_frame.update_idletasks()
+        self.top_frame.update_idletasks()
         c.config(scrollregion=c.bbox("all"))
 
-    def _add_button(self, icon, name):
+    def _add_button(self, icon, name, parent):
         btn = tk.Label(
-            self.btn_frame,
+            parent,
             text=icon,
             font=("Segoe UI Emoji", 16),
             bg=self.theme.get("activity_bar_bg"),
