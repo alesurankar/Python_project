@@ -4,7 +4,7 @@ from tkinter import messagebox
 def default(action):  
     messagebox.showinfo("Info", f"{action} (not implemented yet)")
 
-# terminal_menu functions
+# run_menu functions
 def start_debugging(action):
     default(action)
 

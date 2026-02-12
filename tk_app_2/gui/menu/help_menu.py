@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from gui.menu.commands import help_menu_cmd
+from gui.menu.commands import help_cmd
 
     
 def cmd(name):
@@ -47,10 +47,14 @@ def create_help_menu(root, menubar):
 
 
 def dispatch(action):
-    func = getattr(help_menu_cmd, action, None)
+    func = getattr(help_cmd, action, None)
 
-    if callable(func):
-        func(action)
-    else:
+    if not callable(func):
         messagebox.showinfo("Info", f"Function '{action}' does not exist.")
         print("❌ Missing function:", action)
+        return
+
+    try:
+        func(action)
+    except TypeError:
+        func()

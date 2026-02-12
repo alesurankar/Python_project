@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from gui.menu.commands import go_menu_cmd
+from gui.menu.commands import go_cmd
 
 
 def cmd(name):
@@ -86,10 +86,14 @@ def create_go_menu(root, menubar):
 
 
 def dispatch(action):
-    func = getattr(go_menu_cmd, action, None)
+    func = getattr(go_cmd, action, None)
 
-    if callable(func):
-        func(action)
-    else:
-        messagebox.showinfo("Info", f"❌ Function '{action}' does not exist.")
+    if not callable(func):
+        messagebox.showinfo("Info", f"Function '{action}' does not exist.")
         print("❌ Missing function:", action)
+        return
+
+    try:
+        func(action)
+    except TypeError:
+        func()
