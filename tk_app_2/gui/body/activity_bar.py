@@ -11,7 +11,7 @@ class ActivityBar(tk.Frame):
         self.active_btn = None
         self.buttons = {}
         
-        self.activity_bar = Bar(self, self.state, 50, 0, self.theme.get("activity_bar_bg"))
+        self.activity_bar = Bar(self, self.state, 50, 0, 0, self.theme.get("activity_bar_bg"))
         self.activity_bar.pack(side="left", fill="y")
 
         self._build_ui()

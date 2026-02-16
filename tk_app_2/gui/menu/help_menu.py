@@ -1,6 +1,6 @@
 import tkinter as tk
 from gui.menu.commands import help_cmd
-from gui.menu.helper import menu_helpers as helper
+from gui.menu.helpers import menu_helpers as helper
 
 
 def create_help_menu(root, theme, menubar):
@@ -55,26 +55,5 @@ def create_help_menu(root, theme, menubar):
 
 
 
-def create_help_menu2(parent, theme):
-    btn = tk.Label(
-        parent,
-        text="Help",
-        font=("Segoe UI Emoji", 10),
-        bg=theme.get("menu_bar_bg"),
-        fg=theme.get("menu_bar_text"),
-        padx=6,
-        pady=4,
-    )
-    btn.pack(side="left", padx=2)
-
-    # hover effect
-    def on_enter(e):
-        btn.config(bg=theme.get("menu_bar_bg_hover"), fg=theme.get("menu_bar_text_hover"))
-
-    def on_leave(e):
-        btn.config(bg=theme.get("menu_bar_bg"), fg=theme.get("menu_bar_text"))
-
-    btn.bind("<Enter>", on_enter)
-    btn.bind("<Leave>", on_leave)
-
-    return {"button": btn}
+def expand_help_menu(parent, theme):
+    pass

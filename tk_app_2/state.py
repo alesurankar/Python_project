@@ -8,7 +8,7 @@ class AppState:
         self.themes: dict[str, dict[str, str]] = {
             "dark": {
                 #menu
-                "menu_bar_bg": "#3c3c3c",
+                "menu_bar_bg": "#3a3a3a",
                 "menu_bar_text": "#a1a1a1",
                 "menu_bar_bg_hover": "#454646",
                 "menu_bar_text_hover": "#d4d4d4",

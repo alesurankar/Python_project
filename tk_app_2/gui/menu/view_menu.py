@@ -1,6 +1,6 @@
 import tkinter as tk
 from gui.menu.commands import view_cmd
-from gui.menu.helper import menu_helpers as helper
+from gui.menu.helpers import menu_helpers as helper
 
 
 def create_view_menu(root, theme, menubar):
@@ -156,28 +156,25 @@ def create_view_menu(root, theme, menubar):
 
 
 
+import tkinter as tk
 
 
-def create_view_menu2(parent, theme):
-    btn = tk.Label(
-        parent,
-        text="View",
-        font=("Segoe UI Emoji", 10),
-        bg=theme.get("menu_bar_bg"),
-        fg=theme.get("menu_bar_text"),
-        padx=6,
-        pady=4,
-    )
-    btn.pack(side="left", padx=2)
+def expand_view_menu(btn, state):
+    from othr.bar import Bar
+    theme = state.theme
 
-    # hover effect
-    def on_enter(e):
-        btn.config(bg=theme.get("menu_bar_bg_hover"), fg=theme.get("menu_bar_text_hover"))
+    # parent = root, not the button's frame
+    root = btn.winfo_toplevel()  # main window
 
-    def on_leave(e):
-        btn.config(bg=theme.get("menu_bar_bg"), fg=theme.get("menu_bar_text"))
+    # create the Bar in the root
+    dropdown = Bar(root, state=state, width=120, height = 200, border=0, bg_color=theme.get("menu_bg"))
 
-    btn.bind("<Enter>", on_enter)
-    btn.bind("<Leave>", on_leave)
+    # add a simple label
+    label = tk.Label(dropdown.canvas, text="Dropdown Menu", bg=theme.get("menu_bg"))
+    dropdown.canvas.create_window((0,0), window=label, anchor="nw")
 
-    return {"button": btn}
+    # calculate absolute position relative to root
+    x = btn.winfo_rootx() - root.winfo_rootx()  # button's x relative to root
+    y = btn.winfo_rooty() - root.winfo_rooty() + btn.winfo_height()  # below the button
+
+    dropdown.place(x=x, y=y)
