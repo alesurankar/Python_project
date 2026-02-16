@@ -167,4 +167,12 @@ def expand_view_menu(btn, state):
     btn.menu.add_command("Command Palette...", command=helper.cmd("command_palette", view_cmd))
     btn.menu.add_command("Open View...", command=helper.cmd("open_view", view_cmd))
     btn.menu.add_separator()
-    btn.menu.add_command("Command Palette...", command=helper.cmd("command_palette", view_cmd))
+    
+    # Submenu for "Appearance"
+    appearance_label = btn.menu.add_command(label="Appearance")
+    appearance_menu = DropdownMenu(appearance_label, state)
+
+    appearance_menu.add_command("Full Screen", command=helper.cmd("full_screen", view_cmd))
+    appearance_menu.add_command("Zen Mode", command=helper.cmd("zen_mode", view_cmd))
+    appearance_menu.add_command("Centered Layout", command=helper.cmd("centered_layout", view_cmd))
+    appearance_menu.add_separator()

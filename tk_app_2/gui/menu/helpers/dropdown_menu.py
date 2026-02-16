@@ -45,12 +45,12 @@ class DropdownMenu:
         return inner_bar
 
     # ---------- add command ----------
-    def add_command(self, text, command=None, height=24, padding=4):
+    def add_command(self, label, command=None, height=24, padding=4):
         theme = self.theme
 
         label = tk.Label(
             self.inner.canvas,
-            text=text,
+            text=label,
             bg=theme.get("menu_expand_bg"),
             fg=theme.get("menu_expand_text"),
             anchor="w",
