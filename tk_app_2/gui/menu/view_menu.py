@@ -167,14 +167,22 @@ def expand_view_menu(btn, state):
     root = btn.winfo_toplevel()  # main window
 
     # create the Bar in the root
-    dropdown = Bar(root, state=state, width=120, height = 200, border=0, bg_color=theme.get("menu_bg"))
+    outer_bar = Bar(root, state=state, width=120, height = 200, border=0, bg_color=theme.get("menu_bar_bg"))
 
-    # add a simple label
-    label = tk.Label(dropdown.canvas, text="Dropdown Menu", bg=theme.get("menu_bg"))
-    dropdown.canvas.create_window((0,0), window=label, anchor="nw")
+    inner_bar = Bar(outer_bar, state=state, width=118, height=198, border=0, bg_color=theme.get("menu_expand_bg"))
+    inner_bar.place(x=1, y=1)
 
-    # calculate absolute position relative to root
-    x = btn.winfo_rootx() - root.winfo_rootx()  # button's x relative to root
-    y = btn.winfo_rooty() - root.winfo_rooty() + btn.winfo_height()  # below the button
+    # Add a simple label inside the inner bar
+    label = tk.Label(
+        inner_bar.canvas,
+        text="Dropdown Menu",
+        bg=theme.get("menu_expand_bg"),
+        fg=theme.get("menu_expand_text")
+    )
+    inner_bar.canvas.create_window((0, 0), window=label, anchor="nw")
 
-    dropdown.place(x=x, y=y)
+    # Calculate absolute position relative to root
+    x = btn.winfo_rootx() - root.winfo_rootx()
+    y = btn.winfo_rooty() - root.winfo_rooty() + btn.winfo_height()
+
+    outer_bar.place(x=x, y=y)

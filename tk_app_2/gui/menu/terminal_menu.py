@@ -41,5 +41,5 @@ def create_terminal_menu(root, theme, menubar):
 
 
 
-def expand_terminal_menu(parent, theme):
+def expand_terminal_menu(btn, state):
     pass

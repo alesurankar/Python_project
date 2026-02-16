@@ -86,5 +86,5 @@ def create_file_menu(root, theme, menubar):
 
 
 
-def expand_file_menu(parent, theme):
+def expand_file_menu(btn, state):
     pass

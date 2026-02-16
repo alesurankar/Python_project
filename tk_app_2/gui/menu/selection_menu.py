@@ -42,5 +42,5 @@ def create_selection_menu(root, theme, menubar):
 
 
 
-def expand_selection_menu(parent, theme):
+def expand_selection_menu(btn, state):
     pass

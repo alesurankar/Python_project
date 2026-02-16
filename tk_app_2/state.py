@@ -13,8 +13,9 @@ class AppState:
                 "menu_bar_bg_hover": "#454646",
                 "menu_bar_text_hover": "#d4d4d4",
                 "menu_expand_bg": "#252526",
-                "menu_expand_text": "#ffffff",
+                "menu_expand_text": "#b7b7b8",
                 "menu_expand_bg_hover": "#0078d4",
+                "menu_expand_text_hover": "#ffffff",
                 #body
                 "body_bg": "#1e1e1e",
                 "body_text": "#ffffff",

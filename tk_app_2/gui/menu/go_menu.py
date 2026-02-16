@@ -93,5 +93,5 @@ def create_go_menu(root, theme, menubar):
 
 
 
-def expand_go_menu(parent, theme):
+def expand_go_menu(btn, state):
     pass

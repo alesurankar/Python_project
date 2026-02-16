@@ -36,5 +36,5 @@ def create_edit_menu(root, theme, menubar):
 
 
 
-def expand_edit_menu(parent, theme):
+def expand_edit_menu(btn, state):
     pass

@@ -48,5 +48,5 @@ def create_run_menu(root, theme, menubar):
 
 
 
-def expand_run_menu(parent, theme):
+def expand_run_menu(btn, state):
     pass

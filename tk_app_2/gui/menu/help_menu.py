@@ -55,5 +55,5 @@ def create_help_menu(root, theme, menubar):
 
 
 
-def expand_help_menu(parent, theme):
+def expand_help_menu(btn, state):
     pass
