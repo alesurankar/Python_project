@@ -42,10 +42,9 @@ class MenuBar(tk.Frame):
         c.create_window((0, 0), window=top_frame, anchor="nw")
 
         for name, expand_func in menus.items():
-            btn = create_menu_button(top_frame, name, self.theme)  # creates a Label
+            btn = create_menu_button(top_frame, name, self.theme)
             self.buttons[name] = btn
 
-            # bind left-click to call the expand function
             btn.bind("<Button-1>", lambda e, f=expand_func, b=btn, s=self.state: f(b, s))
 
         top_frame.update_idletasks()
