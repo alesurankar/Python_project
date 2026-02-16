@@ -38,8 +38,9 @@ def create_terminal_menu(root, theme, menubar):
 
 
 
+from gui.menu.helpers.dropdown_menu import DropdownMenu
 
 
 
 def expand_terminal_menu(btn, state):
-    pass
+    btn.menu = DropdownMenu(btn, state)

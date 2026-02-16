@@ -164,7 +164,7 @@ from gui.menu.helpers.dropdown_menu import DropdownMenu
 def expand_view_menu(btn, state):
     btn.menu = DropdownMenu(btn, state)
     
-    btn.menu.add_command("Command Palette", lambda: print("Command Palette"))
-    btn.menu.add_command("Zen Mode", lambda: print("Zen Mode"))
-    btn.menu.add_command("Centered Layout", lambda: print("Centered Layout"))
-    btn.menu.add_command("Centered Layout", lambda: print("Centered Layout"))
+    btn.menu.add_command("Command Palette...", command=helper.cmd("command_palette", view_cmd))
+    btn.menu.add_command("Open View...", command=helper.cmd("open_view", view_cmd))
+    btn.menu.add_separator()
+    btn.menu.add_command("Command Palette...", command=helper.cmd("command_palette", view_cmd))

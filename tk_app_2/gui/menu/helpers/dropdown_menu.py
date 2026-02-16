@@ -12,7 +12,7 @@ class DropdownMenu:
 
         self.visible = False
 
-    # ---------- wrap your create_dropdown_menu ----------
+    # ----------create dropdown_menu ----------
     def _create_inner_bar(self, btn, state, width, height):
         theme = state.theme
         root = btn.winfo_toplevel()
@@ -44,8 +44,8 @@ class DropdownMenu:
         self.outer = outer_bar
         return inner_bar
 
-    # ---------- wrap your add_command ----------
-    def add_command(self, text, command=None, height=24, padding=3):
+    # ---------- add command ----------
+    def add_command(self, text, command=None, height=24, padding=4):
         theme = self.theme
 
         label = tk.Label(
@@ -86,6 +86,31 @@ class DropdownMenu:
         label.bind("<Leave>", on_leave)
 
         return label
+    
+    # ---------- add seperator ----------
+    def add_separator(self, height=1, padding=4, color=None):
+        """Add a horizontal separator line."""
+        color = color or self.theme.get("menu_bar_bg") 
+        sep = tk.Frame(
+            self.inner.canvas,
+            bg=color,
+            height=height,
+            bd=0
+        )
+
+        sep_id = self.inner.canvas.create_window(
+        (0, self.inner._current_y + padding // 2),
+            window=sep,
+            anchor="nw",
+            width=self.inner.winfo_width() 
+        )
+
+        def update_width():
+            self.inner.canvas.itemconfig(sep_id, width=self.inner.winfo_width())
+        self.inner.after(1, update_width)
+
+        self.inner._current_y += height + padding
+        return sep
 
     # ---------- toggle visibility ----------
     def show(self):
