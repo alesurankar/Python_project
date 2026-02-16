@@ -8,7 +8,6 @@ from gui.menu.go_menu import expand_go_menu
 from gui.menu.run_menu import expand_run_menu
 from gui.menu.terminal_menu import expand_terminal_menu
 from gui.menu.help_menu import expand_help_menu
-from gui.menu.helpers.menu_factory import create_menu_button
 
 
 class MenuBar(tk.Frame):
@@ -23,6 +22,39 @@ class MenuBar(tk.Frame):
         self.buttons = {}
 
         self._build_ui()
+
+    # ---------- button creator ----------
+
+    def _create_menu_button(self, parent, text):
+        btn = tk.Label(
+            parent,
+            text=text,
+            font=("Segoe UI Emoji", 10),
+            bg=self.theme.get("menu_bar_bg"),
+            fg=self.theme.get("menu_bar_text"),
+            padx=4,
+            pady=4,
+        )
+        btn.pack(side="left", padx=2)
+
+        def on_enter(e):
+            btn.config(
+                bg=self.theme.get("menu_bar_bg_hover"), 
+                fg=self.theme.get("menu_bar_text_hover")
+            )
+
+        def on_leave(e):
+            btn.config(
+                bg=self.theme.get("menu_bar_bg"), 
+                fg=self.theme.get("menu_bar_text")
+            )
+
+        btn.bind("<Enter>", on_enter)
+        btn.bind("<Leave>", on_leave)
+
+        return btn
+    
+    # ---------- build UI ----------
 
     def _build_ui(self):
         c = self.menu_bar.canvas
@@ -42,11 +74,13 @@ class MenuBar(tk.Frame):
         c.create_window((0, 0), window=top_frame, anchor="nw")
 
         for name, expand_func in menus.items():
-            btn = create_menu_button(top_frame, name, self.theme)
+            btn = self._create_menu_button(top_frame, name)
             self.buttons[name] = btn
 
-            btn.bind("<Button-1>", lambda e, f=expand_func, b=btn, s=self.state: f(b, s))
+            btn.bind(
+                "<Button-1>",
+                lambda e, f=expand_func, b=btn: f(b, self.state)
+            )
 
         top_frame.update_idletasks()
         c.config(scrollregion=c.bbox("all"))
-        

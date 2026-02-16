@@ -158,12 +158,13 @@ def create_view_menu(root, theme, menubar):
 
 
 import tkinter as tk
-from gui.menu.helpers.menu_factory import create_dropdown_menu, add_command
+from gui.menu.helpers.dropdown_menu import DropdownMenu
 
 
 def expand_view_menu(btn, state):
-    inner = create_dropdown_menu(btn, state)
-    add_command(inner, state, "Command Palette", command=lambda: print("Command Palette"))
-    add_command(inner, state, "Zen Mode", command=lambda: print("Zen Mode"))
-    add_command(inner, state, "Centered Layout", command=lambda: print("Centered Layout"))
+    btn.menu = DropdownMenu(btn, state)
     
+    btn.menu.add_command("Command Palette", lambda: print("Command Palette"))
+    btn.menu.add_command("Zen Mode", lambda: print("Zen Mode"))
+    btn.menu.add_command("Centered Layout", lambda: print("Centered Layout"))
+    btn.menu.add_command("Centered Layout", lambda: print("Centered Layout"))
