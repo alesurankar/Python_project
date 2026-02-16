@@ -98,12 +98,12 @@ def create_file_menu2(parent, theme):
     )
     btn.pack(side="left", padx=2)
 
-    # Optional: hover effect
+    # hover effect
     def on_enter(e):
-        btn.config(bg=theme.get("menu_bar_bg_hover"))
+        btn.config(bg=theme.get("menu_bar_bg_hover"), fg=theme.get("menu_bar_text_hover"))
 
     def on_leave(e):
-        btn.config(bg=theme.get("menu_bar_bg"))
+        btn.config(bg=theme.get("menu_bar_bg"), fg=theme.get("menu_bar_text"))
 
     btn.bind("<Enter>", on_enter)
     btn.bind("<Leave>", on_leave)

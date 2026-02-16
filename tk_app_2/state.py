@@ -9,8 +9,9 @@ class AppState:
             "dark": {
                 #menu
                 "menu_bar_bg": "#3c3c3c",
-                "menu_bar_text": "#b3b3b3",
+                "menu_bar_text": "#a1a1a1",
                 "menu_bar_bg_hover": "#454646",
+                "menu_bar_text_hover": "#d4d4d4",
                 "menu_expand_bg": "#252526",
                 "menu_expand_text": "#ffffff",
                 "menu_expand_bg_hover": "#0078d4",
