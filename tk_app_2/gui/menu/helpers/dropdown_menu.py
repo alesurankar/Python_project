@@ -69,6 +69,13 @@ class DropdownMenu:
     
     # ---------- bind hover ----------
     def _bind_hover(self, widget, callback=None, extra_widget=None):
+        def is_descendant(child, parent):
+            while child:
+                if child == parent:
+                    return True
+                child = child.master
+            return False
+        
         def on_enter(e):
             widget.config(
                 bg=self.theme.get("menu_expand_bg_hover"),
@@ -78,14 +85,36 @@ class DropdownMenu:
                 callback(True)
 
         def on_leave(e):
+            widget.after(80, check_leave)
+        
+        def check_leave():
+            hovered = widget.winfo_containing(
+                widget.winfo_pointerx(),
+                widget.winfo_pointery()
+            )
+
+            # pointer outside window
+            if hovered is None:
+                close()
+                return
+
+            # still over widget
+            if is_descendant(hovered, widget):
+                return
+
+            # moved into submenu
+            if extra_widget and is_descendant(hovered, extra_widget):
+                return
+
+            close()
+
+        def close():
             widget.config(
                 bg=self.theme.get("menu_expand_bg"),
                 fg=self.theme.get("menu_expand_text")
             )
-            def check_leave():
-                if callback:
-                    callback(False)
-            widget.after(80, check_leave)
+            if callback:
+                callback(False)
 
         widget.bind("<Enter>", on_enter)
         widget.bind("<Leave>", on_leave)
