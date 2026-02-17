@@ -43,10 +43,11 @@ class DropdownMenu:
 
 
     # ---------- toggle visibility ----------
-    def show(self):
+    def show(self, x=None, y=None):
         if not self.visible:
-            x = self.btn.winfo_rootx() - self.root.winfo_rootx()
-            y = self.btn.winfo_rooty() - self.root.winfo_rooty() + self.btn.winfo_height()
+            if x is None or y is None:
+                x = self.btn.winfo_rootx() - self.root.winfo_rootx()
+                y = self.btn.winfo_rooty() - self.root.winfo_rooty() + self.btn.winfo_height()
             self._place_coords = (x, y)
 
             self.outer.place(x=x, y=y)
@@ -82,15 +83,9 @@ class DropdownMenu:
                 fg=self.theme.get("menu_expand_text")
             )
             def check_leave():
-                # get current mouse position
-                x, y = widget.winfo_pointerxy()
-                # if pointer is over widget OR extra_widget, don't call leave
-                over_widget = widget.winfo_containing(x, y)
-                over_extra = extra_widget.winfo_containing(x, y) if extra_widget else None
-                if over_widget is None and over_extra is None:
-                    if callback:
-                        callback(False)
-            widget.after(50, check_leave)
+                if callback:
+                    callback(False)
+            widget.after(80, check_leave)
 
         widget.bind("<Enter>", on_enter)
         widget.bind("<Leave>", on_leave)
@@ -118,26 +113,22 @@ class DropdownMenu:
 
         self.inner._current_y += height + padding
 
-        # reuse hover logic, but pass a callback to show/hide submenu
+        # ---------- callback  ----------
         def submenu_callback(is_enter):
             if is_enter:
                 x = label.winfo_rootx() - self.root.winfo_rootx() + label.winfo_width()
                 y = label.winfo_rooty() - self.root.winfo_rooty()
-                menu.outer.place(x=x, y=y)
-                menu.outer.lift()
-                menu.visible = True
+                menu.show(x=x, y=y)
             else:
-                menu.outer.place_forget()
-                menu.visible = False
+                menu.hide()
 
-        # Pass the submenu itself so hover logic knows to stay open
         self._bind_hover(label, submenu_callback, extra_widget=menu.outer)
 
         return label
 
 
     # ---------- add command ----------
-    def add_command(self, label, command=None, height=24, padding=4):
+    def add_command(self, label, command, height=24, padding=4):
         label = tk.Label(
             self.inner.canvas,
             text=label,
@@ -158,8 +149,7 @@ class DropdownMenu:
 
         self.inner._current_y += height + padding
 
-        if command:
-            label.bind("<Button-1>", lambda e: (command(), self.hide()))
+        label.bind("<Button-1>", lambda e: (command(), self.hide()))
 
         self._bind_hover(label)
 
