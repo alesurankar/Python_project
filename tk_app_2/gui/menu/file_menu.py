@@ -90,8 +90,17 @@ from gui.menu.helpers.dropdown_menu import DropdownMenu
 
 
 def create_file_menu(btn, state):
-    btn.menu = DropdownMenu(btn, state, width=120, height=200)
-    btn.menu.add_separator()
+    # Main menu
+    btn.menu = DropdownMenu(btn, state, width=180, height=200)
+    btn.menu.add_command(label="Export Profile (Default)...", command=helper.cmd("export_profile_defaults", file_cmd))
+    
+    # Submenu for “Share”
+    btn.share_menu = DropdownMenu(btn, state, width=180, height=120)
+    btn.share_menu.add_command(label="Function inside cascade", command=helper.cmd("export_profile_defaults", file_cmd))
+    btn.share_menu.add_separator()
+    
+    btn.menu.add_cascade(label="Share →", menu=btn.share_menu)
+    
 
 def expand_file_menu(btn):
     btn.menu.show()
