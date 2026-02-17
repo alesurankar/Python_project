@@ -161,11 +161,14 @@ import tkinter as tk
 from gui.menu.helpers.dropdown_menu import DropdownMenu
 
 
-def expand_view_menu(btn, state):
-    btn.menu = DropdownMenu(btn, state)
-    #btn.menu.add_command("Command Palette...", command=helper.cmd("command_palette", view_cmd))
-    #btn.menu.add_command("Open View...", command=helper.cmd("open_view", view_cmd))
-    #btn.menu.add_separator()
+def create_view_menu(btn, state):
+    btn.menu = DropdownMenu(btn, state, width=120, height=200)
+    btn.menu.add_command("Command Palette...", command=helper.cmd("command_palette", view_cmd))
+    btn.menu.add_command("Open View...", command=helper.cmd("open_view", view_cmd))
+    btn.menu.add_separator()
+
+def expand_view_menu(btn):
+    btn.menu.show()
 
 def colapse_view_menu(btn):
-    pass
+    btn.menu.hide()

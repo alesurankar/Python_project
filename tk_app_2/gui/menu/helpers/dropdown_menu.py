@@ -7,8 +7,10 @@ class DropdownMenu:
         self.state = state
         self.theme = state.theme
         self.root = btn.winfo_toplevel()
-        self.inner = self._create_inner_bar(btn, state, width, height)
-        
+        self.visible = False
+        # create bars
+        self.outer, self.inner = self._create_inner_bar(btn, state, width, height)
+        self.outer.place_forget()
 
     # ----------create dropdown_menu ----------
     def _create_inner_bar(self, btn, state, width, height):
@@ -35,24 +37,31 @@ class DropdownMenu:
         inner_bar.place(x=1, y=1)
         inner_bar._current_y = 0
 
-        x = btn.winfo_rootx() - root.winfo_rootx()
-        y = btn.winfo_rooty() - root.winfo_rooty() + btn.winfo_height()
-        outer_bar.place(x=x, y=y)
-
-        self.outer = outer_bar
-        return inner_bar
+        return outer_bar, inner_bar
 
 
+    # ---------- toggle visibility ----------
+    def show(self):
+        if not self.visible:
+            x = self.btn.winfo_rootx() - self.root.winfo_rootx()
+            y = self.btn.winfo_rooty() - self.root.winfo_rooty() + self.btn.winfo_height()
+            self._place_coords = (x, y)
 
+            self.outer.place(x=x, y=y)
+            self.outer.lift()
+            self.root.update_idletasks()
+            self.visible = True
 
+    def hide(self):
+        if self.visible:
+            self.outer.place_forget()
+            self.visible = False
 
-
-
-
-
-
-
-
+    def toggle(self):
+        if self.visible:
+            self.hide()
+        else:
+            self.show()
 
 
     # ---------- add command ----------
@@ -123,18 +132,3 @@ class DropdownMenu:
         self.inner._current_y += height + padding
         return sep
 
-    # ---------- toggle visibility ----------
-    def show(self):
-        pass
-
-    def hide(self):
-        pass
-
-    def toggle(self):
-        if self.visible:
-            self.hide()
-        else:
-            self.show()
-
-    def _outside_click(self, event):
-        pass

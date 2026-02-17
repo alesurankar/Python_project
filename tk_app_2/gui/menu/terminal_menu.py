@@ -38,9 +38,18 @@ def create_terminal_menu(root, theme, menubar):
 
 
 
+import tkinter as tk
 from gui.menu.helpers.dropdown_menu import DropdownMenu
 
 
+def create_terminal_menu(btn, state):
+    btn.menu = DropdownMenu(btn, state, width=120, height=200)
+    btn.menu.add_command(label="New Terminal", command=helper.cmd("new_terminal", terminal_cmd))
+    btn.menu.add_command(label="Split Terminal", command=helper.cmd("split_terminal", terminal_cmd))
+    btn.menu.add_separator()
 
-def expand_terminal_menu(btn, state):
-    btn.menu = DropdownMenu(btn, state)
+def expand_terminal_menu(btn):
+    btn.menu.show()
+
+def colapse_terminal_menu(btn):
+    btn.menu.hide()
