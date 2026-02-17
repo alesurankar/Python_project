@@ -1,13 +1,13 @@
 import tkinter as tk
 from othr.bar import Bar
-from gui.menu.file_menu import expand_file_menu
-from gui.menu.edit_menu import expand_edit_menu
-from gui.menu.selection_menu import expand_selection_menu
+from gui.menu.file_menu import create_file_menu, expand_file_menu, colapse_file_menu
+from gui.menu.edit_menu import create_edit_menu, expand_edit_menu, colapse_edit_menu
+from gui.menu.selection_menu import create_selection_menu, expand_selection_menu,  colapse_selection_menu
 from gui.menu.view_menu import create_view_menu, expand_view_menu, colapse_view_menu
-from gui.menu.go_menu import expand_go_menu
-from gui.menu.run_menu import expand_run_menu
+from gui.menu.go_menu import create_go_menu, expand_go_menu, colapse_go_menu
+from gui.menu.run_menu import create_run_menu, expand_run_menu, colapse_run_menu
 from gui.menu.terminal_menu import create_terminal_menu, expand_terminal_menu, colapse_terminal_menu
-from gui.menu.help_menu import expand_help_menu
+from gui.menu.help_menu import create_help_menu, expand_help_menu, colapse_help_menu
 
 
 class MenuBar(tk.Frame):
@@ -29,14 +29,14 @@ class MenuBar(tk.Frame):
 
         # Menu names and their functions
         menus = {
-            "File": (None, expand_file_menu, None),
-            "Edit": (None, expand_edit_menu, None),
-            "Selection": (None, expand_selection_menu, None),
+            "File": (create_file_menu, expand_file_menu, colapse_file_menu),
+            "Edit": (create_edit_menu, expand_edit_menu, colapse_edit_menu),
+            "Selection": (create_selection_menu, expand_selection_menu, colapse_selection_menu),
             "View": (create_view_menu, expand_view_menu, colapse_view_menu),
-            "Go": (None, expand_go_menu, None),
-            "Run": (None, expand_run_menu, None),
+            "Go": (create_go_menu, expand_go_menu, colapse_go_menu),
+            "Run": (create_run_menu, expand_run_menu, colapse_run_menu),
             "Terminal": (create_terminal_menu, expand_terminal_menu, colapse_terminal_menu),
-            "Help": (None, expand_help_menu, None),
+            "Help": (create_help_menu, expand_help_menu, colapse_help_menu),
         }
         top_frame = tk.Frame(c, bg=self.theme.get("menu_bar_bg"))
         c.create_window((0, 0), window=top_frame, anchor="nw")

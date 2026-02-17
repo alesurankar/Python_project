@@ -9,7 +9,7 @@ from gui.footer_bar import FooterBar
 root = tk.Tk()
 #root.overrideredirect(True)
 root.title("Visual Studio Code - fake")
-root.geometry("800x600+100+100")
+root.geometry("1200x740+100+20")
 icon_path = os.path.join("assets", 'icon.ico')
 root.iconbitmap(icon_path)
 root.minsize(width=400, height=220)

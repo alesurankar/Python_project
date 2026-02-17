@@ -85,6 +85,16 @@ def create_file_menu(root, theme, menubar):
 
 
 
+import tkinter as tk
+from gui.menu.helpers.dropdown_menu import DropdownMenu
 
-def expand_file_menu(btn, state):
-    pass
+
+def create_file_menu(btn, state):
+    btn.menu = DropdownMenu(btn, state, width=120, height=200)
+    btn.menu.add_separator()
+
+def expand_file_menu(btn):
+    btn.menu.show()
+
+def colapse_file_menu(btn):
+    btn.menu.hide()

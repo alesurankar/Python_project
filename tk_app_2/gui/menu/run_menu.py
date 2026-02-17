@@ -47,6 +47,15 @@ def create_run_menu(root, theme, menubar):
 
 
 
+from gui.menu.helpers.dropdown_menu import DropdownMenu
 
-def expand_run_menu(btn, state):
-    pass
+
+def create_run_menu(btn, state):
+    btn.menu = DropdownMenu(btn, state, width=120, height=200)
+    btn.menu.add_separator()
+
+def expand_run_menu(btn):
+    btn.menu.show()
+
+def colapse_run_menu(btn):
+    btn.menu.hide()

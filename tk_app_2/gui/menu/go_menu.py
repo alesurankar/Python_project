@@ -93,5 +93,16 @@ def create_go_menu(root, theme, menubar):
 
 
 
-def expand_go_menu(btn, state):
-    pass
+import tkinter as tk
+from gui.menu.helpers.dropdown_menu import DropdownMenu
+
+
+def create_go_menu(btn, state):
+    btn.menu = DropdownMenu(btn, state, width=120, height=200)
+    btn.menu.add_separator()
+
+def expand_go_menu(btn):
+    btn.menu.show()
+
+def colapse_go_menu(btn):
+    btn.menu.hide()
