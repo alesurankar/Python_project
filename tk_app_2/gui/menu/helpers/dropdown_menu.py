@@ -1,6 +1,7 @@
 import tkinter as tk
 from othr.bar import Bar
 
+
 class DropdownMenu:
     def __init__(self, btn, state, width=50, height=50):
         self.btn = btn
@@ -8,7 +9,7 @@ class DropdownMenu:
         self.theme = state.theme
         self.root = btn.winfo_toplevel()
         self.visible = False
-
+        self.children = []
         # create bars
         self.outer, self.inner = self._create_inner_bar(btn, width, height)
         self.outer.place_forget()
@@ -59,6 +60,8 @@ class DropdownMenu:
         if self.visible:
             self.outer.place_forget()
             self.visible = False
+            for child in self.children:
+                child.hide()
 
     def toggle(self):
         if self.visible:
@@ -77,6 +80,7 @@ class DropdownMenu:
             return False
         
         def on_enter(e):
+            print("on_enter ", widget)
             widget.config(
                 bg=self.theme.get("menu_expand_bg_hover"),
                 fg=self.theme.get("menu_expand_text_hover")
@@ -85,9 +89,11 @@ class DropdownMenu:
                 callback(True)
 
         def on_leave(e):
-            widget.after(80, check_leave)
-        
+            widget.after(1, check_leave)
+            print("on_leave ", widget)
+
         def check_leave():
+            print("cehck_leave ", widget)
             hovered = widget.winfo_containing(
                 widget.winfo_pointerx(),
                 widget.winfo_pointery()
@@ -109,6 +115,8 @@ class DropdownMenu:
             close()
 
         def close():
+            print("close ", widget)
+            print("-----------------")
             widget.config(
                 bg=self.theme.get("menu_expand_bg"),
                 fg=self.theme.get("menu_expand_text")
@@ -118,6 +126,7 @@ class DropdownMenu:
 
         widget.bind("<Enter>", on_enter)
         widget.bind("<Leave>", on_leave)
+        
             
 
     # ---------- add cascade ----------
@@ -141,6 +150,8 @@ class DropdownMenu:
         )
 
         self.inner._current_y += height + padding
+
+        self.children.append(menu)
 
         # ---------- callback  ----------
         def submenu_callback(is_enter):
